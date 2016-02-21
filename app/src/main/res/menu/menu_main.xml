@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.MainActivity">
+    <item
+        android:id="@+id/qod_action_favorite"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/heart_white"
+        />
+
+    <item
+        android:id="@+id/qod_action_share"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/share_white"
+        />
+
+    <item
+        android:id="@+id/wyo_action_done"
+        android:orderInCategory="100"
+        android:title="@string/action_done"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/check"
+        android:visible="false"
+        />
+
+    <item
+        android:id="@+id/wyo_action_share"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/share_white"
+        android:visible="false"
+        />
+
+    <item
+        android:id="@+id/pq_action_info"
+        android:orderInCategory="100"
+        android:title="@string/action_info"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/info"
+        android:visible="false"
+        />
+</menu>

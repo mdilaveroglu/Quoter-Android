@@ -1,0 +1,139 @@
+<resources>
+    <string name="app_name">Quoter</string>
+    <string name="action_share">Share</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_info">Info</string>
+    <string name="action_save">Save</string>
+    <string name="action_done">Done</string>
+    <string name="title_activity_main">Quoter</string>
+    <string name="title_activity_share">Share</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    //MainActivity
+    <string name="str_QOD">Quote of the Day</string>
+    <string name="str_PopularQuotes">Popular Quotes</string>
+    <string name="str_WriteYourOwn">Write Your Own</string>
+    <string name="str_FavoriteQuotes">Favorite Quotes</string>
+    <string name="str_AboutMe">About Me</string>
+    <string name="str_Credits">Credits</string>
+    <string name="str_Application">Application</string>
+
+    //ShareActivity
+    <string name="str_ShareWith">Share with ...</string>
+    <string name="str_ChooseTextFont">Choose Text Font</string>
+    <string name="str_QuoteTextSize">Quote Text Size:</string>
+    <string name="str_AuthorTextSize">Author Text Size:</string>
+    <string name="str_TextColor">Text Color</string>
+    <string name="str_BackgroundColor">Background Color</string>
+    <string name="str_TextFont">Text Font</string>
+
+    //TextFontAdapter
+    <string name="str_SampleText">Sample Text</string>
+
+    //ColorPickerFragment
+    <string name="str_ChooseTextColor">Choose Text Color</string>
+    <string name="str_OK">OK</string>
+    <string name="str_Cancel">Cancel</string>
+
+    //FavoriteQuotesFragment
+    <string name="str_Share">Share</string>
+    <string name="str_Delete">Delete</string>
+    <string name="str_NoFavoriteQuotes">You have no favorite quotes!</string>
+    <string name="str_longClickToDelete">Long click a quote to share or delete.</string>
+
+    //PopularFragment
+    <string name="str_Save">Save</string>
+    <string name="str_Info">Info</string>
+    <string name="str_TakenFromReddit"><![CDATA[Quotes in this page are taken from <u>reddit.com/r/quotes</u> subreddit.]]></string>
+    <string name="str_longClickToShare">Long click a quote to share or save.</string>
+
+    //QodFragment
+    <string name="str_AddedToFavoriteQuotes">Added to favorite quotes.</string>
+    <string name="str_Refreshing">Refreshing ...</string>
+    <string name="str_WithinQuotation">“%1$s”</string>
+    <string name="str_Retry">RETRY</string>
+    <string name="str_NoInternetConnection">No internet connection!</string>
+    <string name="str_Oops">Oops! Something went wrong.\n Touch too try again.</string>
+
+    //AboutMeFragment
+    <string name="str_Mehmet">Mehmet Dilaveroğlu</string>
+    <string name="str_Email">mdilaveroglu@gmail.com</string>
+    <string name="str_twitter"><a href="https://twitter.com/mdilaverm">twitter.com/mdilaverm</a></string>
+    <string name="str_facebook"><a href="https://www.facebook.com/mdilaveroglu">facebook.com/mdilaveroglu</a></string>
+    <string name="str_linkedin"><a href="https://tr.linkedin.com/in/mdilaveroglu">linkedin.com/in/mdilaveroglu</a></string>
+
+    //CreditsFragment
+    <string name="str_Android">Android</string>
+    <string name="str_GoogleIncOHA">© Google Inc. and the Open Handset Alliance</string>
+    <string name="str_ProjectHomePage">Project home page:</string>
+    <string name="str_AndroidLink"><a href="https://android.googlesource.com/">https://android.googlesource.com/</a></string>
+    <string name="str_AndroidApacheLicence">Android is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_AndroidSupportLibrary">Android Support Library</string>
+    <string name="str_AndroidSupportLibraryApacheLicence">Android Support Library is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_AsyncHTTP">Android Asynchronous Http Client</string>
+    <string name="str_Loopj">Loopj</string>
+    <string name="str_AsyncHTTPLink"><a href="http://loopj.com/android-async-http/">http://loopj.com/android-async-http/</a></string>
+    <string name="str_AsyncHTTPLicence">Android Asynchronous Http Client is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_AutoTextView">AutoFitTextView</string>
+    <string name="str_AutoTextViewInc">© 2014 Grantland Chew</string>
+    <string name="str_AutoTextViewLink"><a href="https://github.com/grantland/android-autofittextview/">https://github.com/grantland/android-autofittextview/</a></string>
+    <string name="str_AutoTextViewLicence">AutoFitTextView is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_Gson">Gson</string>
+    <string name="str_GoogleInc">© 2008 Google Inc.</string>
+    <string name="str_GsonLink"><a href="https://github.com/google/gson/">https://github.com/google/gson/</a></string>
+    <string name="str_GsonLicence">Gson is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_Lobsterpicker">Lobsterpicker</string>
+    <string name="str_MarieSandLarsW">© 2015 Marie Schweiz &amp; Lars Werkman</string>
+    <string name="str_LobsterpickerLink"><a href="https://github.com/LarsWerkman/Lobsterpicker/">https://github.com/LarsWerkman/Lobsterpicker/</a></string>
+    <string name="str_LobsterpickerLicence">Lobsterpicker is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_FButton">FButton</string>
+    <string name="str_LeVanHoang">© 2014 Le Van Hoang</string>
+    <string name="str_FButtonLink"><a href="https://github.com/hoang8f/android-flat-button/">https://github.com/hoang8f/android-flat-button/</a></string>
+    <string name="str_FButtonLicence">FButton is licenced under the Apache Licence, Version 2.0</string>
+
+    <string name="str_JSoup">JSoup</string>
+    <string name="str_JonathanHedley">© 2009-2015 Jonathan Hedley</string>
+    <string name="str_JSoupLink"><a href="http://jsoup.org/">http://jsoup.org/</a></string>
+    <string name="str_JSoupLicence">JSoup is licenced under the MIT Licence</string>
+
+    <string name="str_CircleImageView">CircleImageView</string>
+    <string name="str_HenningDodenhof">© 2014-2015 Henning Dodenhof</string>
+    <string name="str_CircleImageViewLink"><a href="https://github.com/hdodenhof/CircleImageView/">https://github.com/hdodenhof/CircleImageView/</a></string>
+    <string name="str_CircleImageViewLicence">CircleImageView is licenced under the Apache Licence, Version 2.0</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="str_hannaCredit">
+        <![CDATA[
+        <div>Icons made by <a href="http://www.flaticon.com/authors/hanan" title="Hanan">Hanan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+         ]]>
+    </string>
+
+    <string name="str_googleCredit">
+        <![CDATA[
+        <div>Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+         ]]>
+    </string>
+
+    <string name="str_freepikCredit">
+        <![CDATA[
+        <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+         ]]>
+    </string>
+
+    <string name="str_hannaIcons">Tick Icon</string>
+    <string name="str_googleIcons">Heart Icon</string>
+    <string name="str_freepikIcons">Quotation Marks, Stairs, Plus, Info and Contract Icons</string>
+    <string name="str_QodCredit">Quote of the day is taken from <a href="https://en.wikiquote.org">Wikiquote</a>.</string>
+    <string name="str_PopularCredit">Popular quates are taken from <a href="https://reddit.com/r/quotes">Reddit Quotes subreddit</a>.</string>
+    <string name="str_FontsCredit">All the fonts in this app are taken from <a href="http://www.fontsquirrel.com/">Font Squirrel</a>. I do not own any of them.</string>
+    <string name="str_BackgroundCredit">Navigation drawer header background and Quote of the day backgrounds are taken from  <a href="https://plus.google.com/photos/102898026333733818285/albums/6081914916274644193/">Ultimate Material Lollipop Collection</a> by J. Amourette.</string>
+
+
+</resources>
