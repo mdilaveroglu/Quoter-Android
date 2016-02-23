@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             qodFavorite.setVisible(false);
             qodShare.setVisible(false);
             wyoDone.setVisible(false);
-            wyoShare.setVisible(true);
+            wyoShare.setVisible(false);
             pqInfo.setVisible(false);
 
             fragment = new CreditsFragment();
