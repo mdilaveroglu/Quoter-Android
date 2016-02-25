@@ -19,7 +19,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center|start"
-            android:text="Most awesome quote in the world"
             android:textSize="16sp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -31,8 +30,7 @@
             android:gravity="center|end"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="JJ Abrams"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </LinearLayout>

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +80,6 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         activity.setActionBarItemsClickListener(this);
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"LobsterTwo-Regular.otf");
-
 
         qodText = (TextView) view.findViewById(R.id.tvQodText);
         qodAuthor = (TextView) view.findViewById(R.id.tvQodAuthor);
@@ -164,8 +164,8 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         Elements author = rows.get(1).select("td");
         Whitelist whitelist = Whitelist.none();
 
-        String newQuote = Jsoup.clean(qod.toString(), whitelist);
-        String newAuthor = Jsoup.clean(author.toString(), whitelist).replace("~", "");
+        String newQuote = Html.fromHtml(Jsoup.clean(qod.toString(), whitelist)).toString();
+        String newAuthor = Html.fromHtml(Jsoup.clean(author.toString(), whitelist).replace("~", "")).toString();
 
         if(!qodString.equals("") && !authorString.equals("")){
             if (!qodString.equals(newQuote) || !authorString.equals(newAuthor)){
