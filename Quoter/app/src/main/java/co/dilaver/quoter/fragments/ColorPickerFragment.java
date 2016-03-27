@@ -21,15 +21,15 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import co.dilaver.quoter.R;
 import com.larswerkman.lobsterpicker.LobsterPicker;
 import com.larswerkman.lobsterpicker.OnColorListener;
 import com.larswerkman.lobsterpicker.sliders.LobsterOpacitySlider;
 import com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider;
+
+import co.dilaver.quoter.R;
 
 
 public class ColorPickerFragment extends DialogFragment {
@@ -42,12 +42,17 @@ public class ColorPickerFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.str_ChooseTextColor));
 
+        int oldColor = getArguments().getInt("color");
+
         final View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_color_picker, null);
         builder.setView(view);
 
         final LobsterPicker lobsterPicker = (LobsterPicker) view.findViewById(R.id.lobsterpicker);
         LobsterShadeSlider shadeSlider = (LobsterShadeSlider) view.findViewById(R.id.shadeslider);
         LobsterOpacitySlider opacitySlider = (LobsterOpacitySlider) view.findViewById(R.id.opacityslider);
+
+        lobsterPicker.setColor(oldColor);
+        lobsterPicker.setHistory(oldColor);
 
         lobsterPicker.addDecorator(shadeSlider);
         lobsterPicker.addDecorator(opacitySlider);

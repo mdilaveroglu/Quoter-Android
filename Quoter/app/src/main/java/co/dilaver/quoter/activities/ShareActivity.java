@@ -24,8 +24,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -36,14 +36,13 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.adapters.TextFontAdapter;
 import co.dilaver.quoter.constants.Fonts;
 import co.dilaver.quoter.fragments.ColorPickerFragment;
-
-import java.io.File;
-import java.io.FileOutputStream;
-
 import info.hoang8f.widget.FButton;
 
 public class ShareActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener  {
@@ -138,8 +137,11 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        Bundle args = new Bundle();
         if (v == chooseTextColor) {
             ColorPickerFragment fragment = new ColorPickerFragment();
+            args.putInt("color", chooseTextColor.getButtonColor());
+            fragment.setArguments(args);
             fragment.show(getFragmentManager(), "TextColorPicker");
             fragment.setColorChangeListener(new ColorPickerFragment.ColorChangeListener() {
                 @Override
@@ -151,6 +153,8 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             });
         } else if (v == chooseBackgroundColor) {
             ColorPickerFragment fragment = new ColorPickerFragment();
+            args.putInt("color", chooseBackgroundColor.getButtonColor());
+            fragment.setArguments(args);
             fragment.show(getFragmentManager(), "BackgroundColorPicker");
             fragment.setColorChangeListener(new ColorPickerFragment.ColorChangeListener() {
                 @Override
