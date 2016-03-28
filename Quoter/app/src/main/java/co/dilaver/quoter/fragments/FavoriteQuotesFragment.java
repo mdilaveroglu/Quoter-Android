@@ -30,24 +30,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.adapters.QuotesAdapter;
 import co.dilaver.quoter.application.MyApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 
-public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.LongClickListener{
+public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.LongClickListener {
 
     private static final String TAG = PopularFragment.class.getSimpleName();
     private QuotesAdapter quotesAdapter;
     private ArrayList<Quote> favoriteQuotesList;
-    private TextView noFavoriteQuotes;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +56,7 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
 
         favoriteQuotesList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvFavoriteQuotes);
-        noFavoriteQuotes = (TextView) view.findViewById(R.id.tvNoFavoriteQuotes);
+        TextView noFavoriteQuotes = (TextView) view.findViewById(R.id.tvNoFavoriteQuotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quotesAdapter = new QuotesAdapter(getActivity());
         quotesAdapter.setLongClickListener(this);
@@ -66,9 +65,9 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
         favoriteQuotesList = MyApplication.savedQuotesList;
         quotesAdapter.setList(favoriteQuotesList);
 
-        if (favoriteQuotesList.isEmpty()){
+        if (favoriteQuotesList.isEmpty()) {
             noFavoriteQuotes.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             Toast.makeText(getActivity(), getString(R.string.str_longClickToDelete), Toast.LENGTH_SHORT).show();
         }
 

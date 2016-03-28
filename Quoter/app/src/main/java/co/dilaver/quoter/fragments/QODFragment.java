@@ -31,13 +31,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import co.dilaver.quoter.R;
-import co.dilaver.quoter.activities.MainActivity;
-import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.application.MyApplication;
-import co.dilaver.quoter.models.Quote;
-import co.dilaver.quoter.network.QuoterRestClient;
-import co.dilaver.quoter.storage.SharedPrefStorage;
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -48,11 +41,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
+import co.dilaver.quoter.R;
+import co.dilaver.quoter.activities.MainActivity;
+import co.dilaver.quoter.activities.ShareActivity;
+import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.models.Quote;
+import co.dilaver.quoter.network.QuoterRestClient;
+import co.dilaver.quoter.storage.SharedPrefStorage;
 import cz.msebera.android.httpclient.Header;
 import me.grantland.widget.AutofitHelper;
 
 
-public class QODFragment extends Fragment implements MainActivity.ActionBarItemsClickListener{
+public class QODFragment extends Fragment implements MainActivity.ActionBarItemsClickListener {
 
     private static final String TAG = QODFragment.class.getSimpleName();
 
@@ -64,8 +64,8 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     private CoordinatorLayout rootLayout;
     private ProgressBar loadingQod;
 
-    String qodString = "";
-    String authorString = "";
+    private String qodString = "";
+    private String authorString = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,13 +73,12 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
         View view = inflater.inflate(R.layout.fragment_qod, container, false);
 
-
         sharedPrefStorage = new SharedPrefStorage(getActivity());
 
         MainActivity activity = (MainActivity) getActivity();
         activity.setActionBarItemsClickListener(this);
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"LobsterTwo-Regular.otf");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "LobsterTwo-Regular.otf");
 
         qodText = (TextView) view.findViewById(R.id.tvQodText);
         qodAuthor = (TextView) view.findViewById(R.id.tvQodAuthor);
@@ -100,14 +99,14 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         qodText.setTypeface(font);
         qodAuthor.setTypeface(font);
 
-        if (sharedPrefStorage.getQodText().equals("empty") || sharedPrefStorage.getQodAuthor().equals("empty")){
+        if (sharedPrefStorage.getQodText().equals("empty") || sharedPrefStorage.getQodAuthor().equals("empty")) {
             loadingQod.setVisibility(View.VISIBLE);
             getQod();
-        }else{
+        } else {
             qodString = sharedPrefStorage.getQodText();
             authorString = sharedPrefStorage.getQodAuthor();
 
-            qodText.setText(getString(R.string.str_WithinQuotation,qodString));
+            qodText.setText(getString(R.string.str_WithinQuotation, qodString));
             qodAuthor.setText(authorString);
             getQod();
         }
@@ -115,7 +114,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         return view;
     }
 
-    private void getQod(){
+    private void getQod() {
 
         QuoterRestClient.get(QuoterRestClient.QOD, null, new JsonHttpResponseHandler() {
             @Override
@@ -123,8 +122,10 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
                 super.onSuccess(statusCode, headers, response);
 
                 try {
-                    loadingQod.setVisibility(View.GONE);
-                    parseQodResponse(response);
+                    if (getActivity() != null) {
+                        loadingQod.setVisibility(View.GONE);
+                        parseQodResponse(response);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -134,28 +135,27 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
-                if (loadingQod.isShown()){
+                if (loadingQod.isShown()) {
                     loadingQod.setVisibility(View.GONE);
                     noData.setVisibility(View.VISIBLE);
-                }else{
-                    Snackbar.make(rootLayout,getString(R.string.str_NoInternetConnection),Snackbar.LENGTH_INDEFINITE)
+                } else {
+                    Snackbar.make(rootLayout, getString(R.string.str_NoInternetConnection), Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.str_Retry), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            getQod();
-                        }
-                    })
+                                @Override
+                                public void onClick(View v) {
+                                    getQod();
+                                }
+                            })
                             .show();
                 }
             }
         });
     }
 
-    private void parseQodResponse(JSONObject response) throws JSONException{
+    private void parseQodResponse(JSONObject response) throws JSONException {
         JSONObject parse = response.getJSONObject("parse");
         JSONObject text = parse.getJSONObject("text");
         String content = text.getString("*");
-
 
         Document doc = Jsoup.parse(content);
         Elements table = doc.select("table[style=\"text-align:center; width:100%\"]");
@@ -167,8 +167,8 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         String newQuote = Html.fromHtml(Jsoup.clean(qod.toString(), whitelist)).toString();
         String newAuthor = Html.fromHtml(Jsoup.clean(author.toString(), whitelist).replace("~", "")).toString();
 
-        if(!qodString.equals("") && !authorString.equals("")){
-            if (!qodString.equals(newQuote) || !authorString.equals(newAuthor)){
+        if (!qodString.equals("") && !authorString.equals("")) {
+            if (!qodString.equals(newQuote) || !authorString.equals(newAuthor)) {
                 Snackbar.make(rootLayout, getString(R.string.str_Refreshing), Snackbar.LENGTH_SHORT).show();
             }
         }
@@ -182,22 +182,21 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         Log.e(TAG, "quote: " + qodString);
         Log.e(TAG, "author: " + authorString);
 
-
-        qodText.setText(getString(R.string.str_WithinQuotation,qodString));
+        qodText.setText(getString(R.string.str_WithinQuotation, qodString));
         qodAuthor.setText(authorString);
     }
 
     @Override
     public void qodFavoriteClicked() {
-        if (!qodString.equals("") &&  !authorString.equals("")){
+        if (!qodString.equals("") && !authorString.equals("")) {
 
-            Snackbar.make(rootLayout,getString(R.string.str_AddedToFavoriteQuotes),Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(rootLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
 
             SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
             Gson gson = new Gson();
 
-            Quote quote = new Quote(qodString,authorString);
-            if (!MyApplication.savedQuotesList.contains(quote)){
+            Quote quote = new Quote(qodString, authorString);
+            if (!MyApplication.savedQuotesList.contains(quote)) {
                 MyApplication.savedQuotesList.add(quote);
                 sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
             }
@@ -206,7 +205,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
     @Override
     public void qodShareClicked() {
-        if (!qodString.equals("") &&  !authorString.equals("")){
+        if (!qodString.equals("") && !authorString.equals("")) {
             Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
             shareIntent.putExtra("quote", qodString);
             shareIntent.putExtra("author", authorString);
@@ -225,7 +224,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     }
 
     @Override
-    public void pqInfoCliked() {
+    public void pqInfoClicked() {
 
     }
 }

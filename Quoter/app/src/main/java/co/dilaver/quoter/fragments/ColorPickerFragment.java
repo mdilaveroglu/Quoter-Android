@@ -34,7 +34,7 @@ import co.dilaver.quoter.R;
 
 public class ColorPickerFragment extends DialogFragment {
 
-    ColorChangeListener colorChangeListener;
+    private ColorChangeListener colorChangeListener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

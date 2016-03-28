@@ -27,13 +27,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.application.MyApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
-import com.google.gson.Gson;
 
 
 public class WriteYourOwnFragment extends Fragment implements MainActivity.ActionBarItemsClickListener{
@@ -101,7 +102,7 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
     }
 
     @Override
-    public void pqInfoCliked() {
+    public void pqInfoClicked() {
 
     }
 }

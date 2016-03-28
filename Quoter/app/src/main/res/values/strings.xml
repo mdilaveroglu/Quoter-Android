@@ -20,7 +20,7 @@
     <string name="str_Application">Application</string>
 
     //ShareActivity
-    <string name="str_ShareWith">Share with ...</string>
+    <string name="str_ShareWith">Share with …</string>
     <string name="str_ChooseTextFont">Choose Text Font</string>
     <string name="str_QuoteTextSize">Quote Text Size:</string>
     <string name="str_AuthorTextSize">Author Text Size:</string>
@@ -50,7 +50,7 @@
 
     //QodFragment
     <string name="str_AddedToFavoriteQuotes">Added to favorite quotes.</string>
-    <string name="str_Refreshing">Refreshing ...</string>
+    <string name="str_Refreshing">Refreshing …</string>
     <string name="str_WithinQuotation">“%1$s”</string>
     <string name="str_Retry">RETRY</string>
     <string name="str_NoInternetConnection">No internet connection!</string>
@@ -99,12 +99,12 @@
     <string name="str_FButtonLicence">FButton is licenced under the Apache Licence, Version 2.0</string>
 
     <string name="str_JSoup">JSoup</string>
-    <string name="str_JonathanHedley">© 2009-2015 Jonathan Hedley</string>
+    <string name="str_JonathanHedley">© 2009–2015 Jonathan Hedley</string>
     <string name="str_JSoupLink"><a href="http://jsoup.org/">http://jsoup.org/</a></string>
     <string name="str_JSoupLicence">JSoup is licenced under the MIT Licence</string>
 
     <string name="str_CircleImageView">CircleImageView</string>
-    <string name="str_HenningDodenhof">© 2014-2015 Henning Dodenhof</string>
+    <string name="str_HenningDodenhof">© 2014–2015 Henning Dodenhof</string>
     <string name="str_CircleImageViewLink"><a href="https://github.com/hdodenhof/CircleImageView/">https://github.com/hdodenhof/CircleImageView/</a></string>
     <string name="str_CircleImageViewLicence">CircleImageView is licenced under the Apache Licence, Version 2.0</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -134,6 +134,9 @@
     <string name="str_PopularCredit">Popular quates are taken from <a href="https://reddit.com/r/quotes">Reddit Quotes subreddit</a>.</string>
     <string name="str_FontsCredit">All the fonts in this app are taken from <a href="http://www.fontsquirrel.com/">Font Squirrel</a>. I do not own any of them.</string>
     <string name="str_BackgroundCredit">Navigation drawer header background and Quote of the day backgrounds are taken from  <a href="https://plus.google.com/photos/102898026333733818285/albums/6081914916274644193/">Ultimate Material Lollipop Collection</a> by J. Amourette.</string>
-
+    <string name="quoteWithColon">Quote:</string>
+    <string name="authorWithColon">Author:</string>
+    <string name="quote">Quote</string>
+    <string name="author">Author</string>
 
 </resources>

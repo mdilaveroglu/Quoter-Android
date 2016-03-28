@@ -34,14 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import co.dilaver.quoter.R;
-import co.dilaver.quoter.activities.MainActivity;
-import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.adapters.QuotesAdapter;
-import co.dilaver.quoter.application.MyApplication;
-import co.dilaver.quoter.models.Quote;
-import co.dilaver.quoter.network.QuoterRestClient;
-import co.dilaver.quoter.storage.SharedPrefStorage;
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -51,10 +43,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import co.dilaver.quoter.R;
+import co.dilaver.quoter.activities.MainActivity;
+import co.dilaver.quoter.activities.ShareActivity;
+import co.dilaver.quoter.adapters.QuotesAdapter;
+import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.models.Quote;
+import co.dilaver.quoter.network.QuoterRestClient;
+import co.dilaver.quoter.storage.SharedPrefStorage;
 import cz.msebera.android.httpclient.Header;
 
-
-public class PopularFragment extends Fragment implements QuotesAdapter.LongClickListener, MainActivity.ActionBarItemsClickListener{
+public class PopularFragment extends Fragment implements QuotesAdapter.LongClickListener, MainActivity.ActionBarItemsClickListener {
 
     private static final String TAG = PopularFragment.class.getSimpleName();
     private QuotesAdapter quotesAdapter;
@@ -108,8 +107,10 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                 super.onSuccess(statusCode, headers, response);
 
                 try {
-                    pbPopularQuotes.setVisibility(View.GONE);
-                    parsePopularQuotesResponse(response);
+                    if (getActivity() != null) {
+                        pbPopularQuotes.setVisibility(View.GONE);
+                        parsePopularQuotesResponse(response);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -127,28 +128,28 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
         });
     }
 
-    private void parsePopularQuotesResponse(JSONObject response) throws JSONException{
+    private void parsePopularQuotesResponse(JSONObject response) throws JSONException {
         JSONObject data = response.getJSONObject("data");
         JSONArray children = data.getJSONArray("children");
-        for (int i=0; i<children.length(); i++){
+        for (int i = 0; i < children.length(); i++) {
             JSONObject quoteChildren = children.getJSONObject(i);
             JSONObject quoteData = quoteChildren.getJSONObject("data");
             String quoteString = quoteData.getString("title");
-            if (quoteString.contains("\"")){
-                quoteString = quoteString.replace("\"","");
+            if (quoteString.contains("\"")) {
+                quoteString = quoteString.replace("\"", "");
             }
 
-            if (quoteString.contains("“")){
-                quoteString = quoteString.replace("“","");
+            if (quoteString.contains("“")) {
+                quoteString = quoteString.replace("“", "");
             }
 
-            if (quoteString.contains("”")){
-                quoteString =quoteString.replace("”","");
+            if (quoteString.contains("”")) {
+                quoteString = quoteString.replace("”", "");
             }
 
 
             if (quoteString.contains("-")) {
-                Log.e(TAG, "contains short dash: "+i);
+                Log.e(TAG, "contains short dash: " + i);
                 String quoteText = quoteString.split("\\-")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("-") + 1);
 
@@ -156,8 +157,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     popularQuotesList.add(new Quote(quoteText, quoteAuthor));
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
-            }else if (quoteString.contains("\u2015")){
-                Log.e(TAG, "contains long dash: "+i);
+            } else if (quoteString.contains("\u2015")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2015")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2015") + 1);
@@ -167,8 +168,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
 
-            }else if (quoteString.contains("\u2014")){
-                Log.e(TAG, "contains long dash: "+i);
+            } else if (quoteString.contains("\u2014")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2014")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2014") + 1);
@@ -178,8 +179,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
 
-            }else if (quoteString.contains("\u2013")){
-                Log.e(TAG, "contains long dash: "+i) ;
+            } else if (quoteString.contains("\u2013")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2013")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2013") + 1);
@@ -188,8 +189,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     popularQuotesList.add(new Quote(quoteText, quoteAuthor));
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
-            }else if (quoteString.contains("\u2012")){
-                Log.e(TAG, "contains long dash: "+i);
+            } else if (quoteString.contains("\u2012")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2012")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2012") + 1);
@@ -198,8 +199,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     popularQuotesList.add(new Quote(quoteText, quoteAuthor));
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
-            }else if (quoteString.contains("\u2011")){
-                Log.e(TAG, "contains long dash: "+i);
+            } else if (quoteString.contains("\u2011")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2011")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2011") + 1);
@@ -208,9 +209,8 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     popularQuotesList.add(new Quote(quoteText, quoteAuthor));
                     Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
                 }
-            }
-            else if (quoteString.contains("\u2010")){
-                Log.e(TAG, "contains long dash: "+i);
+            } else if (quoteString.contains("\u2010")) {
+                Log.e(TAG, "contains long dash: " + i);
 
                 String quoteText = quoteString.split("\\\u2010")[0];
                 String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2010") + 1);
@@ -223,7 +223,7 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
         }
 
         quotesAdapter.setList(popularQuotesList);
-        Toast.makeText(getActivity(),getString(R.string.str_longClickToShare),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getString(R.string.str_longClickToShare), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -231,24 +231,24 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
         showAlertDialog(position);
     }
 
-    private void showAlertDialog(final int pos){
+    private void showAlertDialog(final int pos) {
         CharSequence[] items = {getString(R.string.str_Save), getString(R.string.str_Share)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                if (item == 0){
+                if (item == 0) {
                     SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
                     Gson gson = new Gson();
 
-                    if (!MyApplication.savedQuotesList.contains(popularQuotesList.get(pos))){
+                    if (!MyApplication.savedQuotesList.contains(popularQuotesList.get(pos))) {
                         MyApplication.savedQuotesList.add(popularQuotesList.get(pos));
                         sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
                     }
 
                     Snackbar.make(rootLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
 
-                }else if (item == 1) {
+                } else if (item == 1) {
                     Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
                     shareIntent.putExtra("quote", popularQuotesList.get(pos).getQuoteText());
                     shareIntent.putExtra("author", popularQuotesList.get(pos).getQuoteAuthor());
@@ -281,7 +281,7 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     }
 
     @Override
-    public void pqInfoCliked() {
+    public void pqInfoClicked() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.str_Info));
         builder.setMessage(Html.fromHtml(getString(R.string.str_TakenFromReddit)));

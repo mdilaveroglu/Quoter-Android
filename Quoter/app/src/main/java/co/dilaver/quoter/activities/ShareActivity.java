@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -45,25 +46,24 @@ import co.dilaver.quoter.constants.Fonts;
 import co.dilaver.quoter.fragments.ColorPickerFragment;
 import info.hoang8f.widget.FButton;
 
-public class ShareActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener  {
+public class ShareActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     private static final String TAG = ShareActivity.class.getSimpleName();
-    FButton chooseTextColor;
-    FButton chooseBackgroundColor;
-    FButton chooseTextFont;
+    private FButton chooseTextColor;
+    private FButton chooseBackgroundColor;
+    private FButton chooseTextFont;
 
-    SeekBar chooseQuoteTextSize;
-    SeekBar chooseAuthorTextSize;
-    TextView quoteTextSizeDisplay;
-    TextView authorTextSizeDisplay;
+    private SeekBar chooseQuoteTextSize;
+    private SeekBar chooseAuthorTextSize;
+    private TextView quoteTextSizeDisplay;
+    private TextView authorTextSizeDisplay;
 
-    RelativeLayout previewLayout;
-    ImageView finalImage;
-    TextView previewQuote;
-    TextView previewAuthor;
+    private RelativeLayout previewLayout;
+    private ImageView finalImage;
+    private TextView previewQuote;
+    private TextView previewAuthor;
 
-    TextFontAdapter textFontAdapter;
-
+    private TextFontAdapter textFontAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,10 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         chooseTextColor = (FButton) findViewById(R.id.btChooseTextColor);
         chooseBackgroundColor = (FButton) findViewById(R.id.btChooseBackgroundColor);
         chooseTextFont = (FButton) findViewById(R.id.btChooseTextFont);
@@ -99,7 +101,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         chooseAuthorTextSize.setProgress(15);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "LobsterTwo-Regular.otf");
-        finalImage.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        finalImage.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         previewQuote.setText(getIntent().getStringExtra("quote"));
         previewAuthor.setText(getIntent().getStringExtra("author"));
         previewQuote.setTextColor(Color.WHITE);
@@ -109,7 +111,6 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         previewQuote.setTypeface(typeface);
         previewAuthor.setTypeface(typeface);
         chooseTextFont.setTypeface(typeface);
-
     }
 
     @Override
@@ -126,20 +127,19 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             onBackPressed();
-        }else if (id == R.id.share_action_done){
+        } else if (id == R.id.share_action_done) {
             save();
         }
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onClick(View v) {
-        Bundle args = new Bundle();
         if (v == chooseTextColor) {
             ColorPickerFragment fragment = new ColorPickerFragment();
+            Bundle args = new Bundle();
             args.putInt("color", chooseTextColor.getButtonColor());
             fragment.setArguments(args);
             fragment.show(getFragmentManager(), "TextColorPicker");
@@ -153,6 +153,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             });
         } else if (v == chooseBackgroundColor) {
             ColorPickerFragment fragment = new ColorPickerFragment();
+            Bundle args = new Bundle();
             args.putInt("color", chooseBackgroundColor.getButtonColor());
             fragment.setArguments(args);
             fragment.show(getFragmentManager(), "BackgroundColorPicker");
@@ -163,7 +164,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                     finalImage.setBackgroundColor(colorValue);
                 }
             });
-        }else if (v == chooseTextFont) {
+        } else if (v == chooseTextFont) {
             showFontSelectionDialog();
         }
     }
@@ -196,130 +197,130 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(DialogInterface dialog, int which) {
                 String textFontString = "";
                 switch (which) {
-                    case Fonts.ALEXBRUSH_REGULAR :
+                    case Fonts.ALEXBRUSH_REGULAR:
                         textFontString = "AlexBrush-Regular.ttf";
                         break;
-                    case Fonts.ALLER_LT :
+                    case Fonts.ALLER_LT:
                         textFontString = "Aller_Lt.ttf";
                         break;
-                    case Fonts.ALLURA_REGULAR :
+                    case Fonts.ALLURA_REGULAR:
                         textFontString = "Allura-Regular.otf";
                         break;
-                    case Fonts.AMATICSC_REGULAR :
+                    case Fonts.AMATICSC_REGULAR:
                         textFontString = "AmaticSC-Regular.ttf";
                         break;
-                    case Fonts.ANTONIO_REGULAR :
+                    case Fonts.ANTONIO_REGULAR:
                         textFontString = "Antonio-Regular.ttf";
                         break;
-                    case Fonts.ARIZONIA_REGULAR :
+                    case Fonts.ARIZONIA_REGULAR:
                         textFontString = "Arizonia-Regular.ttf";
                         break;
-                    case Fonts.BEBAS___ :
+                    case Fonts.BEBAS___:
                         textFontString = "BEBAS___.ttf";
                         break;
-                    case Fonts.CAPTURE_IT :
+                    case Fonts.CAPTURE_IT:
                         textFontString = "Capture_it.ttf";
                         break;
-                    case Fonts.CAVIARDREAMS :
+                    case Fonts.CAVIARDREAMS:
                         textFontString = "CaviarDreams.ttf";
                         break;
-                    case Fonts.CHUNKFIVE :
+                    case Fonts.CHUNKFIVE:
                         textFontString = "Chunkfive.otf";
                         break;
-                    case Fonts.DANCINGSCRIPT_REGULAR :
+                    case Fonts.DANCINGSCRIPT_REGULAR:
                         textFontString = "DancingScript-Regular.otf";
                         break;
-                    case Fonts.DOSIS_REGULAR :
+                    case Fonts.DOSIS_REGULAR:
                         textFontString = "Dosis-Regular.otf";
                         break;
-                    case Fonts.EXO_REGULAR :
+                    case Fonts.EXO_REGULAR:
                         textFontString = "Exo-Regular.otf";
                         break;
-                    case Fonts.FFF_TUSJ :
+                    case Fonts.FFF_TUSJ:
                         textFontString = "FFF_Tusj.ttf";
                         break;
-                    case Fonts.GOODDOG :
+                    case Fonts.GOODDOG:
                         textFontString = "GoodDog.otf";
                         break;
-                    case Fonts.GRANDHOTEL_REGULAR :
+                    case Fonts.GRANDHOTEL_REGULAR:
                         textFontString = "GrandHotel-Regular.otf";
                         break;
-                    case Fonts.GREATVIBES_REGULAR :
+                    case Fonts.GREATVIBES_REGULAR:
                         textFontString = "GreatVibes-Regular.otf";
                         break;
-                    case Fonts.KAUSHANSCRIPT_REGULAR :
+                    case Fonts.KAUSHANSCRIPT_REGULAR:
                         textFontString = "KaushanScript-Regular.otf";
                         break;
-                    case Fonts.LATO_REGULAR :
+                    case Fonts.LATO_REGULAR:
                         textFontString = "Lato-Regular.ttf";
                         break;
-                    case Fonts.LEAGUEGOTHIC_REGULAR :
+                    case Fonts.LEAGUEGOTHIC_REGULAR:
                         textFontString = "LeagueGothic-Regular.otf";
                         break;
-                    case Fonts.LEARNINGCURVE_OT :
+                    case Fonts.LEARNINGCURVE_OT:
                         textFontString = "LearningCurve_OT.otf";
                         break;
-                    case Fonts.LOBSTERTWO_REGULAR :
+                    case Fonts.LOBSTERTWO_REGULAR:
                         textFontString = "LobsterTwo-Regular.otf";
                         break;
-                    case Fonts.LOBSTER :
+                    case Fonts.LOBSTER:
                         textFontString = "Lobster.otf";
                         break;
-                    case Fonts.MATHLETE_BULKY :
+                    case Fonts.MATHLETE_BULKY:
                         textFontString = "Mathlete-Bulky.otf";
                         break;
-                    case Fonts.MONTSERRAT_REGULAR :
+                    case Fonts.MONTSERRAT_REGULAR:
                         textFontString = "Montserrat-Regular.otf";
                         break;
-                    case Fonts.OPENSANS_REGULAR :
+                    case Fonts.OPENSANS_REGULAR:
                         textFontString = "OpenSans-Regular.ttf";
                         break;
-                    case Fonts.OSWALD_REGULAR :
+                    case Fonts.OSWALD_REGULAR:
                         textFontString = "Oswald-Regular.ttf";
                         break;
-                    case Fonts.PACIFICO :
+                    case Fonts.PACIFICO:
                         textFontString = "Pacifico.ttf";
                         break;
-                    case Fonts.PLAYFAIRDISPLAYSC_REGULAR :
+                    case Fonts.PLAYFAIRDISPLAYSC_REGULAR:
                         textFontString = "PlayfairDisplaySC-Regular.ttf";
                         break;
-                    case Fonts.QUICKSAND_REGULAR :
+                    case Fonts.QUICKSAND_REGULAR:
                         textFontString = "Quicksand-Regular.otf";
                         break;
-                    case Fonts.RALEWAY_REGULAR :
+                    case Fonts.RALEWAY_REGULAR:
                         textFontString = "Raleway-Regular.ttf";
                         break;
-                    case Fonts.ROBOTO_REGULAR :
+                    case Fonts.ROBOTO_REGULAR:
                         textFontString = "Roboto-Regular.ttf";
                         break;
-                    case Fonts.ROBOTOSLAB_REGULAR :
+                    case Fonts.ROBOTOSLAB_REGULAR:
                         textFontString = "RobotoSlab-Regular.ttf";
                         break;
-                    case Fonts.SEASRN__ :
+                    case Fonts.SEASRN__:
                         textFontString = "SEASRN__.ttf";
                         break;
-                    case Fonts.SOFIA_REGULAR :
+                    case Fonts.SOFIA_REGULAR:
                         textFontString = "Sofia-Regular.otf";
                         break;
-                    case Fonts.SOURCESANSPRO_REGULAR :
+                    case Fonts.SOURCESANSPRO_REGULAR:
                         textFontString = "SourceSansPro-Regular.otf";
                         break;
-                    case Fonts.TITILLIUM_REGULAR :
+                    case Fonts.TITILLIUM_REGULAR:
                         textFontString = "Titillium-Regular.otf";
                         break;
-                    case Fonts.WALKWAY_BOLD :
+                    case Fonts.WALKWAY_BOLD:
                         textFontString = "Walkway_Bold.ttf";
                         break;
-                    case Fonts.WINDSONG :
+                    case Fonts.WINDSONG:
                         textFontString = "Windsong.ttf";
                         break;
-                    case Fonts.BLACK_JACK :
+                    case Fonts.BLACK_JACK:
                         textFontString = "black_jack.ttf";
                         break;
-                    case Fonts.CAC_CHAMPAGNE :
+                    case Fonts.CAC_CHAMPAGNE:
                         textFontString = "cac_champagne.ttf";
                         break;
-                    case Fonts.OSTRICH_REGULAR :
+                    case Fonts.OSTRICH_REGULAR:
                         textFontString = "ostrich-regular.ttf";
                         break;
                 }
@@ -335,7 +336,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         builder.show();
     }
 
-    public void save() {
+    private void save() {
 
         previewLayout.setDrawingCacheEnabled(true);
         previewLayout.buildDrawingCache();

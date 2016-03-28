@@ -23,23 +23,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import co.dilaver.quoter.R;
-import co.dilaver.quoter.models.Quote;
-
 import java.util.Collections;
 import java.util.List;
+
+import co.dilaver.quoter.R;
+import co.dilaver.quoter.models.Quote;
 
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 
     private static final String TAG = QuotesAdapter.class.getSimpleName();
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<Quote> data = Collections.emptyList();
-    Context ctx;
-    LongClickListener clickListener;
+    private LongClickListener clickListener;
 
     public QuotesAdapter(Context context) {
-        ctx = context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -71,9 +69,8 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
-
-        TextView quote;
-        TextView author;
+        private final TextView quote;
+        private final TextView author;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -88,7 +85,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         @Override
         public boolean onLongClick(View v) {
             if (clickListener != null) {
-                clickListener.longClicked(v, getPosition());
+                clickListener.longClicked(v, getAdapterPosition());
             }
 
             return false;

@@ -25,7 +25,7 @@ public class QuoterRestClient {
     public static final String QOD = "https://en.wikiquote.org/w/api.php?format=json&action=parse&page=Template:QoD&prop=text";
     public static final String POPULAR = "https://www.reddit.com/r/quotes.json";
 
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(url, params, responseHandler);

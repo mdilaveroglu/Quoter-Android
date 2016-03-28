@@ -28,9 +28,9 @@ import co.dilaver.quoter.R;
 import co.dilaver.quoter.constants.Fonts;
 
 public class TextFontAdapter extends BaseAdapter{
-    private LayoutInflater inflater;
 
-    Context context;
+    private final LayoutInflater inflater;
+    private final Context context;
 
     public TextFontAdapter(Context context) {
 

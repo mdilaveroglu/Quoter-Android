@@ -7,11 +7,11 @@ import android.content.SharedPreferences;
 public class SharedPrefStorage {
 
     private static final String USER_PREFS = "USER_PREFS";
-    private SharedPreferences appSharedPrefs;
-    private SharedPreferences.Editor prefsEditor;
-    private String savedQuotes = "savedQuotes";
-    private String qodText = "qodText";
-    private String qodAuthor = "qodAuthor";
+    private final SharedPreferences appSharedPrefs;
+    private final SharedPreferences.Editor prefsEditor;
+    private final String savedQuotes = "savedQuotes";
+    private final String qodText = "qodText";
+    private final String qodAuthor = "qodAuthor";
 
     public SharedPrefStorage(Context context) {
         this.appSharedPrefs = context.getSharedPreferences(USER_PREFS, Activity.MODE_PRIVATE);

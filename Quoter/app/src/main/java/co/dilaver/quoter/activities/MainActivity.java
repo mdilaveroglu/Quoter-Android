@@ -39,16 +39,27 @@ import co.dilaver.quoter.fragments.WriteYourOwnFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private DrawerLayout drawerLayout;
+    private MenuItem qodFavorite;
+    private MenuItem qodShare;
+    private MenuItem wyoDone;
+    private MenuItem wyoShare;
+    private MenuItem pqInfo;
 
-    MenuItem qodFavorite;
-    MenuItem qodShare;
-    MenuItem wyoDone;
-    MenuItem wyoShare;
-    MenuItem pqInfo;
+    private ActionBarItemsClickListener actionBarItemsClickListener;
+    private Fragment fragment;
 
-    ActionBarItemsClickListener actionBarItemsClickListener;
-    Fragment fragment;
+    public interface ActionBarItemsClickListener {
+        void qodFavoriteClicked();
+
+        void qodShareClicked();
+
+        void wyoSaveClicked();
+
+        void wyoShareClicked();
+
+        void pqInfoClicked();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +67,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.str_QOD));
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getString(R.string.str_QOD));
+        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -72,34 +85,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, fragment);
         ft.commit();
-
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             if (fragment instanceof QODFragment) {
                 super.onBackPressed();
-            } else {
-                getSupportActionBar().setTitle(getString(R.string.str_QOD));
-
-                qodFavorite.setVisible(true);
-                qodShare.setVisible(true);
-                wyoDone.setVisible(false);
-                wyoShare.setVisible(false);
-                pqInfo.setVisible(false);
-
-                fragment = new QODFragment();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.mainFrame, fragment);
-                ft.commit();
+                return;
             }
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(getString(R.string.str_QOD));
+            }
+            qodFavorite.setVisible(true);
+            qodShare.setVisible(true);
+            wyoDone.setVisible(false);
+            wyoShare.setVisible(false);
+            pqInfo.setVisible(false);
+
+            fragment = new QODFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame, fragment);
+            ft.commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,134 +126,126 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.qod_action_favorite) {
-            if (actionBarItemsClickListener != null) {
-                actionBarItemsClickListener.qodFavoriteClicked();
-            }
-
-            return true;
-        } else if (id == R.id.qod_action_share) {
-            if (actionBarItemsClickListener != null) {
-                actionBarItemsClickListener.qodShareClicked();
-            }
-
-            return true;
-        } else if (id == R.id.wyo_action_done) {
-            if (actionBarItemsClickListener != null) {
-                actionBarItemsClickListener.wyoSaveClicked();
-            }
-
-            return true;
-        } else if (id == R.id.wyo_action_share) {
-            if (actionBarItemsClickListener != null) {
-                actionBarItemsClickListener.wyoShareClicked();
-            }
-
-            return true;
-        } else if (id == R.id.pq_action_info) {
-            if (actionBarItemsClickListener != null) {
-                actionBarItemsClickListener.pqInfoCliked();
-            }
-
-            return true;
+        switch (item.getItemId()) {
+            case R.id.qod_action_favorite:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.qodFavoriteClicked();
+                }
+                return true;
+            case R.id.qod_action_share:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.qodShareClicked();
+                }
+                return true;
+            case R.id.wyo_action_done:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.wyoSaveClicked();
+                }
+                return true;
+            case R.id.wyo_action_share:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.wyoShareClicked();
+                }
+                return true;
+            case R.id.pq_action_info:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.pqInfoClicked();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.qod) {
-            getSupportActionBar().setTitle(getString(R.string.str_QOD));
+        switch (item.getItemId()) {
+            case R.id.qod:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_QOD));
+                }
+                qodFavorite.setVisible(true);
+                qodShare.setVisible(true);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
 
-            qodFavorite.setVisible(true);
-            qodShare.setVisible(true);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(false);
+                fragment = new QODFragment();
+                break;
+            case R.id.qodPopular:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_PopularQuotes));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(true);
 
-            fragment = new QODFragment();
+                fragment = new PopularFragment();
+                break;
 
-        } else if (id == R.id.qodPopular) {
-            getSupportActionBar().setTitle(getString(R.string.str_PopularQuotes));
+            case R.id.writeYourOwn:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_WriteYourOwn));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(true);
+                wyoShare.setVisible(true);
+                pqInfo.setVisible(false);
 
-            qodFavorite.setVisible(false);
-            qodShare.setVisible(false);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(true);
+                fragment = new WriteYourOwnFragment();
+                break;
 
-            fragment = new PopularFragment();
+            case R.id.aboutMe:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_AboutMe));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
 
-        } else if (id == R.id.writeYourOwn) {
-            getSupportActionBar().setTitle(getString(R.string.str_WriteYourOwn));
+                fragment = new AboutMeFragment();
+                break;
+            case R.id.credits:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_Credits));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
 
-            qodFavorite.setVisible(false);
-            qodShare.setVisible(false);
-            wyoDone.setVisible(true);
-            wyoShare.setVisible(true);
-            pqInfo.setVisible(false);
+                fragment = new CreditsFragment();
+                break;
+            case R.id.favoriteQuotes:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_FavoriteQuotes));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
 
-            fragment = new WriteYourOwnFragment();
-
-        } else if (id == R.id.aboutMe) {
-            getSupportActionBar().setTitle(getString(R.string.str_AboutMe));
-
-            qodFavorite.setVisible(false);
-            qodShare.setVisible(false);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(false);
-
-            fragment = new AboutMeFragment();
-
-        } else if (id == R.id.credits) {
-            getSupportActionBar().setTitle(getString(R.string.str_Credits));
-
-            qodFavorite.setVisible(false);
-            qodShare.setVisible(false);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(false);
-
-            fragment = new CreditsFragment();
-
-        } else if (id == R.id.favoriteQuotes) {
-            getSupportActionBar().setTitle(getString(R.string.str_FavoriteQuotes));
-
-            qodFavorite.setVisible(false);
-            qodShare.setVisible(false);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(false);
-
-            fragment = new FavoriteQuotesFragment();
+                fragment = new FavoriteQuotesFragment();
+                break;
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, fragment);
         ft.commit();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public interface ActionBarItemsClickListener {
-        void qodFavoriteClicked();
-
-        void qodShareClicked();
-
-        void wyoSaveClicked();
-
-        void wyoShareClicked();
-
-        void pqInfoCliked();
     }
 
     public void setActionBarItemsClickListener(ActionBarItemsClickListener actionBarItemsClickListener) {
