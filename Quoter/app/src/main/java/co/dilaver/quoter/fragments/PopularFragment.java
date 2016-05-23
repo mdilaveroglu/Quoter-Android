@@ -48,6 +48,7 @@ import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.adapters.QuotesAdapter;
 import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.helper.QuoteParser;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.network.QuoterRestClient;
 import co.dilaver.quoter.storage.SharedPrefStorage;
@@ -61,13 +62,14 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     private ProgressBar pbPopularQuotes;
     private CoordinatorLayout rootLayout;
     private TextView noPopularData;
+    QuoteParser quoteParser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
-
+        quoteParser = new QuoteParser();
         popularQuotesList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvPopularQuotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -135,90 +137,12 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
             JSONObject quoteChildren = children.getJSONObject(i);
             JSONObject quoteData = quoteChildren.getJSONObject("data");
             String quoteString = quoteData.getString("title");
-            if (quoteString.contains("\"")) {
-                quoteString = quoteString.replace("\"", "");
-            }
 
-            if (quoteString.contains("“")) {
-                quoteString = quoteString.replace("“", "");
-            }
+            quoteString = quoteParser.removeQuotations(quoteString);
+            Quote popularQuote = quoteParser.getQuoteTextAndAuthorParsingDashes(quoteString);
 
-            if (quoteString.contains("”")) {
-                quoteString = quoteString.replace("”", "");
-            }
-
-
-            if (quoteString.contains("-")) {
-                Log.e(TAG, "contains short dash: " + i);
-                String quoteText = quoteString.split("\\-")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("-") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-            } else if (quoteString.contains("\u2015")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2015")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2015") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-
-            } else if (quoteString.contains("\u2014")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2014")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2014") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-
-            } else if (quoteString.contains("\u2013")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2013")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2013") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-            } else if (quoteString.contains("\u2012")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2012")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2012") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-            } else if (quoteString.contains("\u2011")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2011")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2011") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
-            } else if (quoteString.contains("\u2010")) {
-                Log.e(TAG, "contains long dash: " + i);
-
-                String quoteText = quoteString.split("\\\u2010")[0];
-                String quoteAuthor = quoteString.substring(quoteString.indexOf("\u2010") + 1);
-
-                if (quoteAuthor.length() < 20) {
-                    popularQuotesList.add(new Quote(quoteText, quoteAuthor));
-                    Log.e(TAG, "popularQuotesList: " + popularQuotesList.toString());
-                }
+            if (popularQuote.getQuoteAuthor().length() < 20 && popularQuote.getQuoteAuthor().length() > 0 ) {
+                popularQuotesList.add(popularQuote);
             }
         }
 

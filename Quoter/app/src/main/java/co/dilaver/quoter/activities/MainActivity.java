@@ -35,6 +35,7 @@ import co.dilaver.quoter.fragments.FavoriteQuotesFragment;
 import co.dilaver.quoter.fragments.PopularFragment;
 import co.dilaver.quoter.fragments.QODFragment;
 import co.dilaver.quoter.R;
+import co.dilaver.quoter.fragments.SettingsFragment;
 import co.dilaver.quoter.fragments.WriteYourOwnFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -237,6 +238,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 fragment = new FavoriteQuotesFragment();
                 break;
+            case R.id.settings:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_Settings));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
+
+                fragment = new SettingsFragment();
+                break;
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -251,6 +264,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setActionBarItemsClickListener(ActionBarItemsClickListener actionBarItemsClickListener) {
         this.actionBarItemsClickListener = actionBarItemsClickListener;
     }
-
-
 }

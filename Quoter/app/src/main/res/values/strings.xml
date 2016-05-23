@@ -17,6 +17,7 @@
     <string name="str_FavoriteQuotes">Favorite Quotes</string>
     <string name="str_AboutMe">About Me</string>
     <string name="str_Credits">Credits</string>
+    <string name="str_Settings">Settings</string>
     <string name="str_Application">Application</string>
 
     //ShareActivity
@@ -55,6 +56,10 @@
     <string name="str_Retry">RETRY</string>
     <string name="str_NoInternetConnection">No internet connection!</string>
     <string name="str_Oops">Oops! Something went wrong.\n Touch too try again.</string>
+
+    //SettingsFragment
+    <string name="str_QodFontSetting">Quote of the Day Text Font</string>
+    <string name="str_QodColorSetting">Quote of the Day Text Color</string>
 
     //AboutMeFragment
     <string name="str_Mehmet">Mehmet Dilaveroğlu</string>
@@ -128,15 +133,17 @@
     </string>
 
     <string name="str_hannaIcons">Tick Icon</string>
-    <string name="str_googleIcons">Heart Icon</string>
+    <string name="str_googleIcons">Heart and Settings Icons</string>
     <string name="str_freepikIcons">Quotation Marks, Stairs, Plus, Info and Contract Icons</string>
     <string name="str_QodCredit">Quote of the day is taken from <a href="https://en.wikiquote.org">Wikiquote</a>.</string>
     <string name="str_PopularCredit">Popular quates are taken from <a href="https://reddit.com/r/quotes">Reddit Quotes subreddit</a>.</string>
-    <string name="str_FontsCredit">All the fonts in this app are taken from <a href="http://www.fontsquirrel.com/">Font Squirrel</a>. I do not own any of them.</string>
-    <string name="str_BackgroundCredit">Navigation drawer header background and Quote of the day backgrounds are taken from  <a href="https://plus.google.com/photos/102898026333733818285/albums/6081914916274644193/">Ultimate Material Lollipop Collection</a> by J. Amourette.</string>
+    <string name="str_FontsCredit">All the fonts in this app are taken from <a href="http://www.fontsquirrel.com/">Font Squirrel</a>. I do not own any of them.</string>s<string name="str_BackgroundCredit">Navigation drawer header background and Quote of the day backgrounds are taken from  <a href="https://plus.google.com/photos/102898026333733818285/albums/6081914916274644193/">Ultimate Material Lollipop Collection</a> by J. Amourette.</string>
     <string name="quoteWithColon">Quote:</string>
     <string name="authorWithColon">Author:</string>
     <string name="quote">Quote</string>
     <string name="author">Author</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

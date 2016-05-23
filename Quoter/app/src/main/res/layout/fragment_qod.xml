@@ -34,18 +34,15 @@
                 android:id="@+id/tvQodText"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:maxLines="10"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                autofit:minTextSize="16dp"/>
+                android:layout_weight="7"
+                android:gravity="center|fill_vertical"
+                android:maxLines="30"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/tvQodAuthor"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="bottom|center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@android:color/white" />

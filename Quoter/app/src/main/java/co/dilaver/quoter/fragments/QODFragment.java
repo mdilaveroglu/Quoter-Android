@@ -58,6 +58,8 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
     private SharedPrefStorage sharedPrefStorage;
 
+    Typeface font;
+
     private TextView qodText;
     private TextView qodAuthor;
     private TextView noData;
@@ -78,7 +80,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         MainActivity activity = (MainActivity) getActivity();
         activity.setActionBarItemsClickListener(this);
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "LobsterTwo-Regular.otf");
+        font = Typeface.createFromAsset(getActivity().getAssets(), sharedPrefStorage.getQodFont());
 
         qodText = (TextView) view.findViewById(R.id.tvQodText);
         qodAuthor = (TextView) view.findViewById(R.id.tvQodAuthor);
@@ -98,6 +100,8 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
         qodText.setTypeface(font);
         qodAuthor.setTypeface(font);
+        qodText.setTextColor(sharedPrefStorage.getQodColor());
+        qodAuthor.setTextColor(sharedPrefStorage.getQodColor());
 
         if (sharedPrefStorage.getQodText().equals("empty") || sharedPrefStorage.getQodAuthor().equals("empty")) {
             loadingQod.setVisibility(View.VISIBLE);
@@ -112,6 +116,18 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (font != null) {
+            qodText.setTypeface(font);
+            qodAuthor.setTypeface(font);
+            qodText.setTextColor(sharedPrefStorage.getQodColor());
+            qodAuthor.setTextColor(sharedPrefStorage.getQodColor());
+        }
     }
 
     private void getQod() {
@@ -139,14 +155,16 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
                     loadingQod.setVisibility(View.GONE);
                     noData.setVisibility(View.VISIBLE);
                 } else {
-                    Snackbar.make(rootLayout, getString(R.string.str_NoInternetConnection), Snackbar.LENGTH_INDEFINITE)
-                            .setAction(getString(R.string.str_Retry), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    getQod();
-                                }
-                            })
-                            .show();
+                    if (isAdded()) {
+                        Snackbar.make(rootLayout, getString(R.string.str_NoInternetConnection), Snackbar.LENGTH_INDEFINITE)
+                                .setAction(getString(R.string.str_Retry), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        getQod();
+                                    }
+                                })
+                                .show();
+                    }
                 }
             }
         });

@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,13 +38,15 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.thebluealliance.spectrum.SpectrumDialog;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.adapters.TextFontAdapter;
 import co.dilaver.quoter.constants.Fonts;
-import co.dilaver.quoter.fragments.ColorPickerFragment;
+import co.dilaver.quoter.storage.SharedPrefStorage;
 import info.hoang8f.widget.FButton;
 
 public class ShareActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -64,6 +67,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     private TextView previewAuthor;
 
     private TextFontAdapter textFontAdapter;
+    private SharedPrefStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,9 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        storage = new SharedPrefStorage(this);
+
         chooseTextColor = (FButton) findViewById(R.id.btChooseTextColor);
         chooseBackgroundColor = (FButton) findViewById(R.id.btChooseBackgroundColor);
         chooseTextFont = (FButton) findViewById(R.id.btChooseTextFont);
@@ -100,7 +107,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         chooseQuoteTextSize.setProgress(25);
         chooseAuthorTextSize.setProgress(15);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "LobsterTwo-Regular.otf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), storage.getQodFont());
         finalImage.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         previewQuote.setText(getIntent().getStringExtra("quote"));
         previewAuthor.setText(getIntent().getStringExtra("author"));
@@ -138,32 +145,40 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == chooseTextColor) {
-            ColorPickerFragment fragment = new ColorPickerFragment();
-            Bundle args = new Bundle();
-            args.putInt("color", chooseTextColor.getButtonColor());
-            fragment.setArguments(args);
-            fragment.show(getFragmentManager(), "TextColorPicker");
-            fragment.setColorChangeListener(new ColorPickerFragment.ColorChangeListener() {
-                @Override
-                public void onColorChanged(int colorValue) {
-                    chooseTextColor.setButtonColor(colorValue);
-                    previewQuote.setTextColor(colorValue);
-                    previewAuthor.setTextColor(colorValue);
-                }
-            });
+            new SpectrumDialog.Builder(this)
+                    .setColors(R.array.demo_colors)
+                    .setDismissOnColorSelected(true)
+                    .setOutlineWidth(2)
+                    .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
+                        @Override
+                        public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                            if (positiveResult) {
+                                chooseTextColor.setButtonColor(color);
+                                chooseTextColor.setTextColor(getContrastColor(color));
+                                previewQuote.setTextColor(color);
+                                previewAuthor.setTextColor(color);
+                            } else {
+
+                            }
+                        }
+                    }).build().show(getSupportFragmentManager(), "dialog_demo_1");
         } else if (v == chooseBackgroundColor) {
-            ColorPickerFragment fragment = new ColorPickerFragment();
-            Bundle args = new Bundle();
-            args.putInt("color", chooseBackgroundColor.getButtonColor());
-            fragment.setArguments(args);
-            fragment.show(getFragmentManager(), "BackgroundColorPicker");
-            fragment.setColorChangeListener(new ColorPickerFragment.ColorChangeListener() {
-                @Override
-                public void onColorChanged(int colorValue) {
-                    chooseBackgroundColor.setButtonColor(colorValue);
-                    finalImage.setBackgroundColor(colorValue);
-                }
-            });
+            new SpectrumDialog.Builder(this)
+                    .setColors(R.array.demo_colors)
+                    .setDismissOnColorSelected(true)
+                    .setOutlineWidth(2)
+                    .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
+                        @Override
+                        public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                            if (positiveResult) {
+                                chooseBackgroundColor.setButtonColor(color);
+                                chooseBackgroundColor.setTextColor(getContrastColor(color));
+                                finalImage.setBackgroundColor(color);
+                            } else {
+
+                            }
+                        }
+                    }).build().show(getSupportFragmentManager(), "dialog_demo_1");
         } else if (v == chooseTextFont) {
             showFontSelectionDialog();
         }
@@ -364,6 +379,11 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + image.getAbsolutePath()));
         shareIntent.setType("image/jpeg");
         startActivity(Intent.createChooser(shareIntent, getString(R.string.str_ShareWith)));
+    }
+
+    private int getContrastColor(int color) {
+        double y = (299 * Color.red(color) + 587 * Color.green(color) + 114 * Color.blue(color)) / 1000;
+        return y >= 128 ? Color.BLACK : Color.WHITE;
     }
 
 }

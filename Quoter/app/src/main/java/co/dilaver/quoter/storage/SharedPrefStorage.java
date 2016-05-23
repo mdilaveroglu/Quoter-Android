@@ -3,6 +3,7 @@ package co.dilaver.quoter.storage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 public class SharedPrefStorage {
 
@@ -12,6 +13,8 @@ public class SharedPrefStorage {
     private final String savedQuotes = "savedQuotes";
     private final String qodText = "qodText";
     private final String qodAuthor = "qodAuthor";
+    private final String qodFont = "qodFont";
+    private final String qodColor = "qodColor";
 
     public SharedPrefStorage(Context context) {
         this.appSharedPrefs = context.getSharedPreferences(USER_PREFS, Activity.MODE_PRIVATE);
@@ -40,6 +43,22 @@ public class SharedPrefStorage {
 
     public void setQodAuthor(String author) {
         prefsEditor.putString(qodAuthor, author).commit();
+    }
+
+    public String getQodFont() {
+        return appSharedPrefs.getString(qodFont, "Exo-Regular.otf");
+    }
+
+    public void setQodFont(String font) {
+        prefsEditor.putString(qodFont, font).commit();
+    }
+
+    public int getQodColor() {
+        return appSharedPrefs.getInt(qodColor, Color.WHITE);
+    }
+
+    public void setQodColor(int color) {
+        prefsEditor.putInt(qodColor, color).commit();
     }
 
 }
