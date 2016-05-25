@@ -62,7 +62,7 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     private ProgressBar pbPopularQuotes;
     private CoordinatorLayout rootLayout;
     private TextView noPopularData;
-    QuoteParser quoteParser;
+    private QuoteParser quoteParser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

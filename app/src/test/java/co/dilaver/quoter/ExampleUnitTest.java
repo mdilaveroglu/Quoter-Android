@@ -1,4 +1,4 @@
-package com.argeusteknoloji.quoter;
+package co.dilaver.quoter;
 
 import org.junit.Test;
 

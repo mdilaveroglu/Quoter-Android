@@ -2,9 +2,6 @@ package co.dilaver.quoter.helper;
 
 import co.dilaver.quoter.models.Quote;
 
-/**
- * Created by argeusmac on 23.05.2016.
- */
 public class QuoteParser {
 
     public String removeQuotations(String inputString){
