@@ -48,4 +48,7 @@ dependencies {
 
     // JUnit4 Rules
     androidTestCompile 'com.android.support.test:rules:0.5'
+
+    // Mock JSON
+    testCompile 'org.json:json:20140107'
 }

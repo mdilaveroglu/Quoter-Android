@@ -23,7 +23,8 @@ import com.loopj.android.http.RequestParams;
 public class QuoterRestClient {
 
     public static final String QOD = "https://en.wikiquote.org/w/api.php?format=json&action=parse&page=Template:QoD&prop=text";
-    public static final String POPULAR = "https://www.reddit.com/r/quotes.json";
+    //    public static final String POPULAR = "https://www.reddit.com/r/quotes.json";
+    public static final String POPULAR = "https://www.reddit.com/r/quotes/top.json";
 
     private static final AsyncHttpClient client = new AsyncHttpClient();
 

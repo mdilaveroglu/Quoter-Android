@@ -26,7 +26,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +36,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
@@ -56,7 +55,6 @@ import cz.msebera.android.httpclient.Header;
 
 public class PopularFragment extends Fragment implements QuotesAdapter.LongClickListener, MainActivity.ActionBarItemsClickListener {
 
-    private static final String TAG = PopularFragment.class.getSimpleName();
     private QuotesAdapter quotesAdapter;
     private ArrayList<Quote> popularQuotesList;
     private ProgressBar pbPopularQuotes;
@@ -65,8 +63,7 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     private QuoteParser quoteParser;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
         quoteParser = new QuoteParser();
@@ -87,7 +84,6 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
         noPopularData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick() called with: " + "v = [" + v + "]");
                 noPopularData.setVisibility(View.GONE);
                 pbPopularQuotes.setVisibility(View.VISIBLE);
 
@@ -101,8 +97,6 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     }
 
     private void getPopularQuotes() {
-        Log.e(TAG, "getPopularQuotes() called with: " + "");
-
         QuoterRestClient.get(QuoterRestClient.POPULAR, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -111,13 +105,22 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                 try {
                     if (getActivity() != null) {
                         pbPopularQuotes.setVisibility(View.GONE);
-                        parsePopularQuotesResponse(response);
+                        
+                        List<Quote> popularQuote = quoteParser.parseQuotesFromReddit(response);
+
+                        for (Quote quote : popularQuote) {
+                            if (quote.getQuoteAuthor().length() < 20 && quote.getQuoteAuthor().length() > 0) {
+                                popularQuotesList.add(quote);
+                            }
+                        }
+
+                        quotesAdapter.setList(popularQuotesList);
+
+                        Toast.makeText(getActivity(), getString(R.string.str_longClickToShare), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                Log.e(TAG, "onSuccess: " + response.toString());
             }
 
             @Override
@@ -128,26 +131,6 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                 noPopularData.setVisibility(View.VISIBLE);
             }
         });
-    }
-
-    private void parsePopularQuotesResponse(JSONObject response) throws JSONException {
-        JSONObject data = response.getJSONObject("data");
-        JSONArray children = data.getJSONArray("children");
-        for (int i = 0; i < children.length(); i++) {
-            JSONObject quoteChildren = children.getJSONObject(i);
-            JSONObject quoteData = quoteChildren.getJSONObject("data");
-            String quoteString = quoteData.getString("title");
-
-            quoteString = quoteParser.removeQuotations(quoteString);
-            Quote popularQuote = quoteParser.getQuoteTextAndAuthorParsingDashes(quoteString);
-
-            if (popularQuote.getQuoteAuthor().length() < 20 && popularQuote.getQuoteAuthor().length() > 0 ) {
-                popularQuotesList.add(popularQuote);
-            }
-        }
-
-        quotesAdapter.setList(popularQuotesList);
-        Toast.makeText(getActivity(), getString(R.string.str_longClickToShare), Toast.LENGTH_SHORT).show();
     }
 
     @Override
