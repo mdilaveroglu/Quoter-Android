@@ -17,9 +17,14 @@
 package co.dilaver.quoter.fragments;
 
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,13 +52,15 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
     private static final String TAG = PopularFragment.class.getSimpleName();
     private QuotesAdapter quotesAdapter;
     private ArrayList<Quote> favoriteQuotesList;
+    private CoordinatorLayout rootLayout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_quotes, container, false);
 
-
+        rootLayout = (CoordinatorLayout) view.findViewById(R.id.clFavoriteRoot);
         favoriteQuotesList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvFavoriteQuotes);
         TextView noFavoriteQuotes = (TextView) view.findViewById(R.id.tvNoFavoriteQuotes);
@@ -80,7 +87,7 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
     }
 
     private void showAlertDialog(final int pos) {
-        CharSequence[] items = {getString(R.string.str_Delete), getString(R.string.str_Share)};
+        CharSequence[] items = {getString(R.string.str_Delete), getString(R.string.str_Share), getString(R.string.str_Copy)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -104,13 +111,17 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
                     quotesAdapter.setList(favoriteQuotesList);
                     quotesAdapter.notifyDataSetChanged();
 
-                } else if (item == 1)
-
-                {
+                } else if (item == 1) {
                     Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
                     shareIntent.putExtra("quote", favoriteQuotesList.get(pos).getQuoteText());
                     shareIntent.putExtra("author", favoriteQuotesList.get(pos).getQuoteAuthor());
                     startActivity(shareIntent);
+                } else if (item == 2) {
+                    ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Copied Text", favoriteQuotesList.get(pos).getQuoteText() + " - " +  favoriteQuotesList.get(pos).getQuoteAuthor());
+                    clipboard.setPrimaryClip(clip);
+
+                    Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

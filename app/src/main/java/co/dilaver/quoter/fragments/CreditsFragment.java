@@ -47,7 +47,6 @@ public class CreditsFragment extends Fragment {
         TextView jSoupLink = (TextView) view.findViewById(R.id.tvJSoupLink);
         TextView circleImageViewLink = (TextView) view.findViewById(R.id.tvCircleImageViewLink);
 
-        TextView hananCredit = (TextView) view.findViewById(R.id.tvHannanCredit);
         TextView googleCredit = (TextView) view.findViewById(R.id.tvGoogleCredit);
         TextView freepikCredit = (TextView) view.findViewById(R.id.tvFreepikCredit);
         TextView qodCredit = (TextView) view.findViewById(R.id.tvQodCredit);
@@ -64,9 +63,6 @@ public class CreditsFragment extends Fragment {
         fButtonLink.setMovementMethod(LinkMovementMethod.getInstance());
         jSoupLink.setMovementMethod(LinkMovementMethod.getInstance());
         circleImageViewLink.setMovementMethod(LinkMovementMethod.getInstance());
-
-        hananCredit.setText(Html.fromHtml(getString(R.string.str_hannaCredit)));
-        hananCredit.setMovementMethod(LinkMovementMethod.getInstance());
 
         googleCredit.setText(Html.fromHtml(getString(R.string.str_googleCredit)));
         googleCredit.setMovementMethod(LinkMovementMethod.getInstance());

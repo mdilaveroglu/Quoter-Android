@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dilaver.quoter.fragments.CreditsFragment">
+    tools:context="co.dilaver.quoter.fragments.CreditsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -369,25 +369,6 @@
                     android:text="@string/str_CircleImageViewLicence" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/str_hannaIcons"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvHannanCredit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
 
             <View
                 android:layout_width="match_parent"

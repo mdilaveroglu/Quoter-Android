@@ -2,10 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activities.MainActivity">
+
+    <item
+        android:id="@+id/qod_action_copy"
+        android:orderInCategory="100"
+        android:title="@string/action_copy"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/copy_white"
+        />
+
     <item
         android:id="@+id/qod_action_favorite"
         android:orderInCategory="100"
-        android:title="@string/action_share"
+        android:title="@string/action_save"
         app:showAsAction="ifRoom"
         android:icon="@drawable/heart_white"
         />

@@ -4,6 +4,7 @@
     <string name="action_favorite">Favorite</string>
     <string name="action_info">Info</string>
     <string name="action_save">Save</string>
+    <string name="action_copy">Copy</string>
     <string name="action_done">Done</string>
     <string name="title_activity_main">Quoter</string>
     <string name="title_activity_share">Share</string>
@@ -38,16 +39,18 @@
     <string name="str_Cancel">Cancel</string>
 
     //FavoriteQuotesFragment
+    <string name="str_Copy">Copy</string>
     <string name="str_Share">Share</string>
     <string name="str_Delete">Delete</string>
     <string name="str_NoFavoriteQuotes">You have no favorite quotes!</string>
-    <string name="str_longClickToDelete">Long click a quote to share or delete.</string>
+    <string name="str_longClickToDelete">Long click a quote to share, delete  or copy.</string>
 
     //PopularFragment
     <string name="str_Save">Save</string>
     <string name="str_Info">Info</string>
     <string name="str_TakenFromReddit"><![CDATA[Quotes in this page are taken from <u>reddit.com/r/quotes</u> subreddit.]]></string>
-    <string name="str_longClickToShare">Long click a quote to share or save.</string>
+    <string name="str_longClickToShare">Long click a quote to share, save or copy.</string>
+    <string name="str_QuoteCopied">Quote copied</string>
 
     //QodFragment
     <string name="str_AddedToFavoriteQuotes">Added to favorite quotes.</string>
@@ -114,15 +117,9 @@
     <string name="str_CircleImageViewLicence">CircleImageView is licenced under the Apache Licence, Version 2.0</string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="str_hannaCredit">
-        <![CDATA[
-        <div>Icons made by <a href="http://www.flaticon.com/authors/hanan" title="Hanan">Hanan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-         ]]>
-    </string>
-
     <string name="str_googleCredit">
         <![CDATA[
-        <div>Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        <div>Icons made by <a href="https://google.com/" title="Google">Google</a> from <a href="https://design.google.com/icons/" title="Material Icons">Material Icons</a> is licensed by <a href="http://www.apache.org/licenses/LICENSE-2.0" title="Apache Licence, Version 2.0" target="_blank">Apache Licence, Version 2.0</a></div>
          ]]>
     </string>
 
@@ -132,9 +129,8 @@
          ]]>
     </string>
 
-    <string name="str_hannaIcons">Tick Icon</string>
-    <string name="str_googleIcons">Heart and Settings Icons</string>
-    <string name="str_freepikIcons">Quotation Marks, Stairs, Plus, Info and Contract Icons</string>
+    <string name="str_googleIcons">Heart, Settings, Info, Copy, Share, Tick, Save Icons</string>
+    <string name="str_freepikIcons">Quotation Marks, Stairs, Plus and Contract Icons</string>
     <string name="str_QodCredit">Quote of the day is taken from <a href="https://en.wikiquote.org">Wikiquote</a>.</string>
     <string name="str_PopularCredit">Popular quates are taken from <a href="https://reddit.com/r/quotes">Reddit Quotes subreddit</a>.</string>
     <string name="str_FontsCredit">All the fonts in this app are taken from <a href="http://www.fontsquirrel.com/">Font Squirrel</a>. I do not own any of them.</string>s<string name="str_BackgroundCredit">Navigation drawer header background and Quote of the day backgrounds are taken from  <a href="https://plus.google.com/photos/102898026333733818285/albums/6081914916274644193/">Ultimate Material Lollipop Collection</a> by J. Amourette.</string>

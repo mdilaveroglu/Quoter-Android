@@ -16,6 +16,9 @@
 
 package co.dilaver.quoter.fragments;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -139,7 +142,7 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     }
 
     private void showAlertDialog(final int pos) {
-        CharSequence[] items = {getString(R.string.str_Save), getString(R.string.str_Share)};
+        CharSequence[] items = {getString(R.string.str_Save), getString(R.string.str_Share),getString(R.string.str_Copy)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -154,12 +157,17 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
                     }
 
                     Snackbar.make(rootLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
-
                 } else if (item == 1) {
                     Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
                     shareIntent.putExtra("quote", popularQuotesList.get(pos).getQuoteText());
                     shareIntent.putExtra("author", popularQuotesList.get(pos).getQuoteAuthor());
                     startActivity(shareIntent);
+                } else if (item == 2) {
+                    ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Copied Text", popularQuotesList.get(pos).getQuoteText() + " - " +  popularQuotesList.get(pos).getQuoteAuthor());
+                    clipboard.setPrimaryClip(clip);
+
+                    Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -174,6 +182,11 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
 
     @Override
     public void qodShareClicked() {
+
+    }
+
+    @Override
+    public void qodCopyClicked() {
 
     }
 
