@@ -39,16 +39,18 @@
     <string name="str_Cancel">Cancel</string>
 
     //FavoriteQuotesFragment
+    <string name="str_Copy">Copy</string>
     <string name="str_Share">Share</string>
     <string name="str_Delete">Delete</string>
     <string name="str_NoFavoriteQuotes">You have no favorite quotes!</string>
-    <string name="str_longClickToDelete">Long click a quote to share or delete.</string>
+    <string name="str_longClickToDelete">Long click a quote to share, delete  or copy.</string>
 
     //PopularFragment
     <string name="str_Save">Save</string>
     <string name="str_Info">Info</string>
     <string name="str_TakenFromReddit"><![CDATA[Quotes in this page are taken from <u>reddit.com/r/quotes</u> subreddit.]]></string>
-    <string name="str_longClickToShare">Long click a quote to share or save.</string>
+    <string name="str_longClickToShare">Long click a quote to share, save or copy.</string>
+    <string name="str_QuoteCopied">Quote copied</string>
 
     //QodFragment
     <string name="str_AddedToFavoriteQuotes">Added to favorite quotes.</string>
