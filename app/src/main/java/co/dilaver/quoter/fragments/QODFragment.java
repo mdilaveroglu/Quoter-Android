@@ -17,6 +17,9 @@
 package co.dilaver.quoter.fragments;
 
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -228,6 +231,17 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
             shareIntent.putExtra("quote", qodString);
             shareIntent.putExtra("author", authorString);
             startActivity(shareIntent);
+        }
+    }
+
+    @Override
+    public void qodCopyClicked() {
+        if (!qodString.equals("") && !authorString.equals("")) {
+            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied Text", qodString + " - " +  authorString);
+            clipboard.setPrimaryClip(clip);
+
+            Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
         }
     }
 
