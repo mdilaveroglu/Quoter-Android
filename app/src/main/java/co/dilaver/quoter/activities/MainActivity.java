@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private MenuItem qodFavorite;
     private MenuItem qodShare;
+    private MenuItem qodCopy;
     private MenuItem wyoDone;
     private MenuItem wyoShare;
     private MenuItem pqInfo;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         void qodFavoriteClicked();
 
         void qodShareClicked();
+
+        void qodCopyClicked();
 
         void wyoSaveClicked();
 
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             qodFavorite.setVisible(true);
             qodShare.setVisible(true);
+            qodCopy.setVisible(true);
             wyoDone.setVisible(false);
             wyoShare.setVisible(false);
             pqInfo.setVisible(false);
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         qodFavorite = menu.findItem(R.id.qod_action_favorite);
         qodShare = menu.findItem(R.id.qod_action_share);
+        qodCopy = menu.findItem(R.id.qod_action_copy);
         wyoDone = menu.findItem(R.id.wyo_action_done);
         wyoShare = menu.findItem(R.id.wyo_action_share);
         pqInfo = menu.findItem(R.id.pq_action_info);
@@ -137,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.qod_action_share:
                 if (actionBarItemsClickListener != null) {
                     actionBarItemsClickListener.qodShareClicked();
+                }
+                return true;
+            case R.id.qod_action_copy:
+                if (actionBarItemsClickListener != null) {
+                    actionBarItemsClickListener.qodCopyClicked();
                 }
                 return true;
             case R.id.wyo_action_done:
@@ -170,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(true);
                 qodShare.setVisible(true);
+                qodCopy.setVisible(true);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
@@ -182,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(true);
@@ -195,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(true);
                 wyoShare.setVisible(true);
                 pqInfo.setVisible(false);
@@ -208,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
@@ -220,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
@@ -232,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
@@ -244,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 qodFavorite.setVisible(false);
                 qodShare.setVisible(false);
+                qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);

@@ -4,6 +4,7 @@
     <string name="action_favorite">Favorite</string>
     <string name="action_info">Info</string>
     <string name="action_save">Save</string>
+    <string name="action_copy">Copy</string>
     <string name="action_done">Done</string>
     <string name="title_activity_main">Quoter</string>
     <string name="title_activity_share">Share</string>
