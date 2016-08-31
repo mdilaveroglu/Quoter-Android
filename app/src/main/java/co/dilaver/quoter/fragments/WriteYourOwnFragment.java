@@ -73,6 +73,11 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
     }
 
     @Override
+    public void qodCopyClicked() {
+
+    }
+
+    @Override
     public void wyoSaveClicked() {
         if (!quoteText.getText().toString().equals("") &&  !quoteAuthor.getText().toString().equals("")){
             SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
