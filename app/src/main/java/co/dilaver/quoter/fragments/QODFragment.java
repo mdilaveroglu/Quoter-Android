@@ -73,8 +73,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     private String authorString = "";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_qod, container, false);
 
@@ -238,7 +237,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     public void qodCopyClicked() {
         if (!qodString.equals("") && !authorString.equals("")) {
             ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Copied Text", qodString + " - " +  authorString);
+            ClipData clip = ClipData.newPlainText("Copied Text", qodString + " - " + authorString);
             clipboard.setPrimaryClip(clip);
 
             Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
