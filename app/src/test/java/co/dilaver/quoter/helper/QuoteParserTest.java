@@ -1,7 +1,6 @@
 package co.dilaver.quoter.helper;
 
 import org.json.JSONObject;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,11 +44,6 @@ public class QuoteParserTest {
         quote = popularQuotesList.get(9);
         assertTrue("Quote text Helen Keller - is not correct", quote.getQuoteText().equals("Cut off as I am, it is inevitable that I should sometimes feel like a shadow walking in a shadowy world. When this happens I ask to be taken to New York City. Always I return home weary but I have the comforting certainty that mankind is real flesh and I myself am not a dream. "));
         assertTrue("Quote author  Helen Keller - is not correct", quote.getQuoteAuthor().equals(" Helen Keller -"));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
 }

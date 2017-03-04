@@ -1,54 +1,53 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId 'co.dilaver.quoter'
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 25
+        versionCode 2
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
 }
 
-// This solves Dependency Conflict with support library 23.4.0, and test app (23.1.1)
-configurations.all {
-    resolutionStrategy {
-        force 'com.android.support:support-annotations:23.1.1'
-    }
+ext {
+    supportLibVersion = '25.2.0'
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
     testCompile 'junit:junit:4.12'
+
+    testCompile 'org.json:json:20160810'
+
     compile files('libs/jsoup-1.8.3.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
+
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:cardview-v7:${supportLibVersion}"
+    compile "com.android.support:support-v4:${supportLibVersion}"
+
+    compile 'com.google.code.gson:gson:2.8.0'
+
     compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.google.code.gson:gson:2.4'
     compile 'info.hoang8f:fbutton:1.0.5'
-    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'me.grantland:autofittextview:0.2.1'
-    compile 'com.thebluealliance:spectrum:0.4.2'
-
-    // Android JUnit Runner
-    androidTestCompile 'com.android.support.test:runner:0.5'
-
-    // JUnit4 Rules
-    androidTestCompile 'com.android.support.test:rules:0.5'
-
-    // Mock JSON
-    testCompile 'org.json:json:20140107'
+    compile 'com.thebluealliance:spectrum:0.7.1'
 }

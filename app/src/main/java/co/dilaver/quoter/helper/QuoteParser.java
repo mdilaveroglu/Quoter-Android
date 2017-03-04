@@ -12,7 +12,6 @@ import co.dilaver.quoter.models.Quote;
 public class QuoteParser {
 
     public List<Quote> parseQuotesFromReddit(JSONObject response) throws JSONException {
-
         List<Quote> quoteArrayList = new ArrayList<>();
 
         JSONObject data = response.getJSONObject("data");
@@ -31,7 +30,6 @@ public class QuoteParser {
     }
 
     private String removeQuotations(String inputString){
-
         if (inputString.contains("\"")) {
             inputString = inputString.replace("\"", "");
         }
@@ -48,7 +46,6 @@ public class QuoteParser {
     }
 
     private Quote getQuoteTextAndAuthorParsingDashes(String quoteString){
-
         String quoteText = "";
         String quoteAuthor = "";
 
@@ -77,4 +74,5 @@ public class QuoteParser {
 
         return new Quote(quoteText,quoteAuthor);
     }
+
 }
