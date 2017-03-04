@@ -3,6 +3,7 @@ package co.dilaver.quoter.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -10,74 +11,49 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.thebluealliance.spectrum.SpectrumDialog;
 
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.adapters.TextFontAdapter;
 import co.dilaver.quoter.constants.Fonts;
-import co.dilaver.quoter.helper.CircleView;
+import co.dilaver.quoter.databinding.FragmentSettingsBinding;
 import co.dilaver.quoter.storage.SharedPrefStorage;
-
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
-    LinearLayout qodTextFontSetting;
-    LinearLayout qodTextColorSetting;
-    TextView qodTextFontSettingFeedback;
-    CircleView qodTextColorSettingFeedback;
-
-    SharedPrefStorage storage;
-    Typeface font;
+    private SharedPrefStorage sharedPrefStorage;
 
     private TextFontAdapter textFontAdapter;
 
+    private FragmentSettingsBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
 
-        storage = new SharedPrefStorage(getActivity());
-        font = Typeface.createFromAsset(getActivity().getAssets(), storage.getQodFont());
-
+        sharedPrefStorage = new SharedPrefStorage(getActivity());
         textFontAdapter = new TextFontAdapter(getActivity());
 
-        qodTextFontSetting = (LinearLayout) view.findViewById(R.id.qodTextFontSetting);
-        qodTextColorSetting = (LinearLayout) view.findViewById(R.id.qodTextColorSetting);
-        qodTextFontSettingFeedback = (TextView) view.findViewById(R.id.qodTextFontSettingFeedback);
-        qodTextColorSettingFeedback = (CircleView) view.findViewById(R.id.qodTextColorSettingFeedback);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), sharedPrefStorage.getQodFont());
+        binding.textViewTextFont.setTypeface(font);
+        binding.circleImageViewTextColor.setFillColor(sharedPrefStorage.getQodColor());
 
-        qodTextFontSetting.setOnClickListener(this);
-        qodTextColorSetting.setOnClickListener(this);
+        binding.linearLayoutTextFontSetting.setOnClickListener(this);
+        binding.linearLayoutTextColorSetting.setOnClickListener(this);
 
-        qodTextFontSettingFeedback.setTypeface(font);
-        qodTextColorSettingFeedback.setCircleColor(storage.getQodColor());
-
-        return view;
+        return binding.getRoot();
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == qodTextFontSetting) {
-            showFontSelectionDialog();
-        } else if (v == qodTextColorSetting) {
-            new SpectrumDialog.Builder(getActivity())
-                    .setColors(R.array.demo_colors)
-                    .setDismissOnColorSelected(true)
-                    .setOutlineWidth(2)
-                    .setSelectedColor(storage.getQodColor())
-                    .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
-                        @Override
-                        public void onColorSelected(boolean positiveResult, @ColorInt int color) {
-                            if (positiveResult) {
-                                qodTextColorSettingFeedback.setCircleColor(color);
-                                storage.setQodColor(color);
-                            }
-                        }
-                    }).build().show(getActivity().getSupportFragmentManager(), "dialog_demo_1");
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.linear_layout_text_font_setting:
+                showFontSelectionDialog();
+                break;
+            case R.id.linear_layout_text_color_setting:
+                showColorSelectionDialog();
+                break;
         }
     }
 
@@ -217,12 +193,32 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 }
 
                 Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), textFontString);
-                qodTextFontSettingFeedback.setTypeface(typeface);
-                storage.setQodFont(textFontString);
+                binding.textViewTextFont.setTypeface(typeface);
+                sharedPrefStorage.setQodFont(textFontString);
             }
         });
         builder.setTitle(getString(R.string.str_ChooseTextFont));
         builder.setCancelable(true);
         builder.show();
     }
+
+    private void showColorSelectionDialog() {
+        new SpectrumDialog.Builder(getActivity())
+                .setColors(R.array.demo_colors)
+                .setDismissOnColorSelected(true)
+                .setOutlineWidth(2)
+                .setSelectedColor(sharedPrefStorage.getQodColor())
+                .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                        if (positiveResult) {
+                            binding.circleImageViewTextColor.setFillColor(color);
+                            sharedPrefStorage.setQodColor(color);
+                        }
+                    }
+                })
+                .build()
+                .show(getActivity().getSupportFragmentManager(), "dialog_demo_1");
+    }
+
 }

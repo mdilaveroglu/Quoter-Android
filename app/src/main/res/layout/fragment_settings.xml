@@ -1,8 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="co.dilaver.quoter.fragments.SettingsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="co.dilaver.quoter.fragments.SettingsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,7 +12,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/qodTextFontSetting"
+                android:id="@+id/linear_layout_text_font_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -29,32 +27,31 @@
                     android:layout_weight="8"
                     android:gravity="center|start"
                     android:text="@string/str_QodFontSetting"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:id="@+id/qodTextFontSettingFeedback"
+                    android:id="@+id/text_view_text_font"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="@string/str_QodFontSetting_Aa"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
-                android:id="@+id/qodTextColorSetting"
+                android:id="@+id/linear_layout_text_color_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -63,26 +60,25 @@
                     android:layout_weight="8"
                     android:gravity="center|start"
                     android:text="@string/str_QodColorSetting"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                <co.dilaver.quoter.helper.CircleView
-                    android:id="@+id/qodTextColorSettingFeedback"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_image_view_text_color"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_margin="4dp"
                     android:layout_weight="2"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:src="@drawable/ic_font_transparent_24px"/>
+
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
+                android:background="@android:color/darker_gray"/>
 
         </LinearLayout>
 
     </ScrollView>
 
-</RelativeLayout>
+</layout>

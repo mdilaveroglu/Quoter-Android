@@ -159,7 +159,9 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                                 previewAuthor.setTextColor(color);
                             }
                         }
-                    }).build().show(getSupportFragmentManager(), "dialog_demo_1");
+                    })
+                    .build()
+                    .show(getSupportFragmentManager(), "dialog_demo_1");
         } else if (v == chooseBackgroundColor) {
             new SpectrumDialog.Builder(this)
                     .setColors(R.array.demo_colors)
@@ -174,7 +176,9 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                                 finalImage.setBackgroundColor(color);
                             }
                         }
-                    }).build().show(getSupportFragmentManager(), "dialog_demo_1");
+                    })
+                    .build()
+                    .show(getSupportFragmentManager(), "dialog_demo_1");
         } else if (v == chooseTextFont) {
             showFontSelectionDialog();
         }
