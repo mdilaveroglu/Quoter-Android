@@ -1,6 +1,6 @@
 # Quoter
 
-This is an Android application I made in my freetime. It is about quotes. The app shows a new quote each day taken from Wikiquote. And it has a popular quotes page that shows quotes from reddit.com/r/quotes subreddit. User also can save qoutes in the app. Quotes can be shared as images with a lot of customization. Feel free to check out the code and use anything you want :)
+This is an Android application I made in my freetime. It is about quotes. The app shows a new quote each day taken from Wikiquote. And it has a popular quotes page that shows quotes from reddit.com/r/quotes subreddit. User also can save quotes in the app. Quotes can be shared as images with a lot of customization. Feel free to check out the code and use anything you want :)
 
 <a href='https://play.google.com/store/apps/details?id=co.dilaver.quoter&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
     <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="100" />

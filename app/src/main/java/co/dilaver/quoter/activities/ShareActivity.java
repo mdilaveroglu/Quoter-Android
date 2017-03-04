@@ -157,8 +157,6 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                                 chooseTextColor.setTextColor(getContrastColor(color));
                                 previewQuote.setTextColor(color);
                                 previewAuthor.setTextColor(color);
-                            } else {
-
                             }
                         }
                     }).build().show(getSupportFragmentManager(), "dialog_demo_1");
@@ -174,8 +172,6 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                                 chooseBackgroundColor.setButtonColor(color);
                                 chooseBackgroundColor.setTextColor(getContrastColor(color));
                                 finalImage.setBackgroundColor(color);
-                            } else {
-
                             }
                         }
                     }).build().show(getSupportFragmentManager(), "dialog_demo_1");

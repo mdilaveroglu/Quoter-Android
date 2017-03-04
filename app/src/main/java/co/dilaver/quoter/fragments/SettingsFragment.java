@@ -61,27 +61,24 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == qodTextFontSetting ){
+        if (v == qodTextFontSetting) {
             showFontSelectionDialog();
-        }else if ( v == qodTextColorSetting ){
-
+        } else if (v == qodTextColorSetting) {
             new SpectrumDialog.Builder(getActivity())
                     .setColors(R.array.demo_colors)
                     .setDismissOnColorSelected(true)
                     .setOutlineWidth(2)
                     .setSelectedColor(storage.getQodColor())
                     .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
-                        @Override public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                        @Override
+                        public void onColorSelected(boolean positiveResult, @ColorInt int color) {
                             if (positiveResult) {
                                 qodTextColorSettingFeedback.setCircleColor(color);
                                 storage.setQodColor(color);
-                            } else {
-
                             }
                         }
                     }).build().show(getActivity().getSupportFragmentManager(), "dialog_demo_1");
         }
-
     }
 
     private void showFontSelectionDialog() {

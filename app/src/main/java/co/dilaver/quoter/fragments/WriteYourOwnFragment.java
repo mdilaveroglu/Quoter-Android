@@ -24,7 +24,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -35,6 +34,7 @@ import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.application.MyApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
+import co.dilaver.quoter.util.ViewUtil;
 
 
 public class WriteYourOwnFragment extends Fragment implements MainActivity.ActionBarItemsClickListener{
@@ -89,8 +89,7 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
                 sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
             }
 
-            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            ViewUtil.hideKeyboard(getActivity());
 
             Snackbar.make(rootLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
         }
