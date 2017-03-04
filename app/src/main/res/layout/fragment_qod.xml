@@ -1,9 +1,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clQodRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.QODFragment">
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:id="@+id/clQodRoot"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 tools:context=".fragments.QODFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,15 +12,16 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/main_background"
             android:scaleType="centerCrop"
-            android:src="@drawable/main_background" />
+            android:src="@drawable/main_background"/>
 
         <ProgressBar
             android:id="@+id/pbQod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="bottom|center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <TextView
@@ -53,11 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_margin="10dp"
+            android:gravity="center"
             android:text="@string/str_Oops"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center"
-            android:visibility="gone" />
-
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

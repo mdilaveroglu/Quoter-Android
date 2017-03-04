@@ -11,6 +11,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    //NavHeaderMain
+    <string name="header_background">Header Background</string>
+    <string name="app_icon">App Icon</string>
+
     //MainActivity
     <string name="str_QOD">Quote of the Day</string>
     <string name="str_PopularQuotes">Popular Quotes</string>
@@ -22,6 +26,7 @@
     <string name="str_Application">Application</string>
 
     //ShareActivity
+    <string name="preview_background">Preview Background</string>
     <string name="str_ShareWith">Share with …</string>
     <string name="str_ChooseTextFont">Choose Text Font</string>
     <string name="str_QuoteTextSize">Quote Text Size:</string>
@@ -53,6 +58,7 @@
     <string name="str_QuoteCopied">Quote copied</string>
 
     //QodFragment
+    <string name="main_background">Main Background</string>
     <string name="str_AddedToFavoriteQuotes">Added to favorite quotes.</string>
     <string name="str_Refreshing">Refreshing …</string>
     <string name="str_WithinQuotation">“%1$s”</string>

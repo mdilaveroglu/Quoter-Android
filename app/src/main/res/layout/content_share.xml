@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:weightSum="20"
-    tools:showIn="@layout/activity_share">
+              xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:weightSum="20"
+              tools:showIn="@layout/activity_share">
 
     <RelativeLayout
         android:id="@+id/rlPreviewLayout"
@@ -22,7 +22,8 @@
             android:id="@+id/ivPreviewBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:contentDescription="@string/preview_background"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,14 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7"
-                android:gravity="center" />
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/tvPreviewAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                android:gravity="center" />
+                android:gravity="center"/>
 
         </LinearLayout>
     </RelativeLayout>
@@ -51,14 +52,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5" />
+        android:layout_weight="0.5"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center|start"
-        android:text="@string/str_QuoteTextSize" />
+        android:text="@string/str_QuoteTextSize"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="8"
-            android:max="50" />
+            android:max="50"/>
 
         <TextView
             android:id="@+id/tvQuoteTextSizeDisplay"
@@ -81,7 +82,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     </LinearLayout>
 
@@ -90,7 +91,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center|start"
-        android:text="@string/str_AuthorTextSize" />
+        android:text="@string/str_AuthorTextSize"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="8"
-            android:max="50" />
+            android:max="50"/>
 
         <TextView
             android:id="@+id/tvAuthorTextSizeDisplay"
@@ -113,7 +114,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     </LinearLayout>
 
@@ -137,8 +138,7 @@
             fbutton:buttonColor="@android:color/white"
             fbutton:cornerRadius="5dp"
             fbutton:shadowColor="@android:color/white"
-            fbutton:shadowEnabled="false" />
-
+            fbutton:shadowEnabled="false"/>
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btChooseBackgroundColor"
@@ -153,14 +153,14 @@
             fbutton:buttonColor="@color/colorPrimary"
             fbutton:cornerRadius="5dp"
             fbutton:shadowColor="@color/colorPrimary"
-            fbutton:shadowEnabled="false" />
-    </LinearLayout>
+            fbutton:shadowEnabled="false"/>
 
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5" />
+        android:layout_weight="0.5"/>
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btChooseTextFont"
@@ -173,6 +173,6 @@
         fbutton:buttonColor="@color/colorAccent"
         fbutton:cornerRadius="5dp"
         fbutton:shadowColor="@color/colorAccent"
-        fbutton:shadowEnabled="false" />
+        fbutton:shadowEnabled="false"/>
 
 </LinearLayout>
