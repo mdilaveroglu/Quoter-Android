@@ -62,6 +62,7 @@
 
     //SettingsFragment
     <string name="str_QodFontSetting">Quote of the Day Text Font</string>
+    <string name="str_QodFontSetting_Aa">Aa</string>
     <string name="str_QodColorSetting">Quote of the Day Text Color</string>
 
     //AboutMeFragment
@@ -138,8 +139,5 @@
     <string name="authorWithColon">Author:</string>
     <string name="quote">Quote</string>
     <string name="author">Author</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

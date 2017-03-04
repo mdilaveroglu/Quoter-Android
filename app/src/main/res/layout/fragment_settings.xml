@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     tools:context="co.dilaver.quoter.fragments.SettingsFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -39,7 +38,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Aa"
+                    android:text="@string/str_QodFontSetting_Aa"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </LinearLayout>
 
@@ -83,7 +82,7 @@
 
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 
 </RelativeLayout>
