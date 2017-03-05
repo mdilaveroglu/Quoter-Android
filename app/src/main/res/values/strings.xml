@@ -23,7 +23,6 @@
     <string name="str_AboutMe">About Me</string>
     <string name="str_Credits">Credits</string>
     <string name="str_Settings">Settings</string>
-    <string name="str_Application">Application</string>
 
     //ShareActivity
     <string name="preview_background">Preview Background</string>

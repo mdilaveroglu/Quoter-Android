@@ -18,6 +18,7 @@ package co.dilaver.quoter.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -28,28 +29,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import co.dilaver.quoter.R;
 import co.dilaver.quoter.fragments.AboutMeFragment;
 import co.dilaver.quoter.fragments.CreditsFragment;
 import co.dilaver.quoter.fragments.FavoriteQuotesFragment;
 import co.dilaver.quoter.fragments.PopularFragment;
 import co.dilaver.quoter.fragments.QODFragment;
-import co.dilaver.quoter.R;
 import co.dilaver.quoter.fragments.SettingsFragment;
 import co.dilaver.quoter.fragments.WriteYourOwnFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private DrawerLayout drawerLayout;
-    private MenuItem qodFavorite;
-    private MenuItem qodShare;
-    private MenuItem qodCopy;
-    private MenuItem wyoDone;
-    private MenuItem wyoShare;
-    private MenuItem pqInfo;
-
-    private ActionBarItemsClickListener actionBarItemsClickListener;
-    private Fragment fragment;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     public interface ActionBarItemsClickListener {
         void qodFavoriteClicked();
@@ -64,6 +55,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         void pqInfoClicked();
     }
+
+    private DrawerLayout drawerLayout;
+    private MenuItem qodFavorite;
+    private MenuItem qodShare;
+    private MenuItem qodCopy;
+    private MenuItem wyoDone;
+    private MenuItem wyoShare;
+    private MenuItem pqInfo;
+
+    private ActionBarItemsClickListener actionBarItemsClickListener;
+    private Fragment fragment;
+
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
         fragment = new QODFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, fragment);
@@ -100,20 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onBackPressed();
                 return;
             }
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle(getString(R.string.str_QOD));
-            }
-            qodFavorite.setVisible(true);
-            qodShare.setVisible(true);
-            qodCopy.setVisible(true);
-            wyoDone.setVisible(false);
-            wyoShare.setVisible(false);
-            pqInfo.setVisible(false);
-
-            fragment = new QODFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainFrame, fragment);
-            ft.commit();
+            View view = bottomNavigationView.findViewById(R.id.action_quote_of_the_day);
+            view.performClick();
         }
     }
 
@@ -171,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.qod:
+            case R.id.action_quote_of_the_day:
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(getString(R.string.str_QOD));
                 }
@@ -184,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 fragment = new QODFragment();
                 break;
-            case R.id.qodPopular:
+            case R.id.action_popular_quotes:
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(getString(R.string.str_PopularQuotes));
                 }
@@ -197,8 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 fragment = new PopularFragment();
                 break;
-
-            case R.id.writeYourOwn:
+            case R.id.action_write_your_own:
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(getString(R.string.str_WriteYourOwn));
                 }
@@ -211,7 +205,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 fragment = new WriteYourOwnFragment();
                 break;
+            case R.id.action_favorite_quotes:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_FavoriteQuotes));
+                }
+                qodFavorite.setVisible(false);
+                qodShare.setVisible(false);
+                qodCopy.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
 
+                fragment = new FavoriteQuotesFragment();
+                break;
+        }
+
+        switch (item.getItemId()) {
             case R.id.aboutMe:
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(getString(R.string.str_AboutMe));
@@ -237,19 +246,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 pqInfo.setVisible(false);
 
                 fragment = new CreditsFragment();
-                break;
-            case R.id.favoriteQuotes:
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(getString(R.string.str_FavoriteQuotes));
-                }
-                qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
-                qodCopy.setVisible(false);
-                wyoDone.setVisible(false);
-                wyoShare.setVisible(false);
-                pqInfo.setVisible(false);
-
-                fragment = new FavoriteQuotesFragment();
                 break;
             case R.id.settings:
                 if (getSupportActionBar() != null) {

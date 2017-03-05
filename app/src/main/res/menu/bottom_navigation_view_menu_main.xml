@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_quote_of_the_day"
+        android:enabled="true"
+        android:icon="@drawable/quote_of_the_day"
+        android:title="@string/str_QOD"/>
+
+    <item
+        android:id="@+id/action_popular_quotes"
+        android:enabled="true"
+        android:icon="@drawable/popular_quotes"
+        android:title="@string/str_PopularQuotes"/>
+
+    <item
+        android:id="@+id/action_write_your_own"
+        android:enabled="true"
+        android:icon="@drawable/write_your_own"
+        android:title="@string/str_WriteYourOwn"/>
+
+    <item
+        android:id="@+id/action_favorite_quotes"
+        android:enabled="true"
+        android:icon="@drawable/heart"
+        android:title="@string/str_FavoriteQuotes"/>
+
+</menu>

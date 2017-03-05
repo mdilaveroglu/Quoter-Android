@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/qod"
-            android:icon="@drawable/quote_of_the_day"
-            android:title="@string/str_QOD" />
-        <item
-            android:id="@+id/qodPopular"
-            android:icon="@drawable/popular_quotes"
-            android:title="@string/str_PopularQuotes" />
-        <item
-            android:id="@+id/writeYourOwn"
-            android:icon="@drawable/write_your_own"
-            android:title="@string/str_WriteYourOwn" />
-        <item
-            android:id="@+id/favoriteQuotes"
-            android:icon="@drawable/heart"
-            android:title="@string/str_FavoriteQuotes" />
-    </group>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="@string/str_Settings"/>
 
-    <item android:title="@string/str_Application">
-        <menu>
-            <item
-                android:id="@+id/settings"
-                android:icon="@drawable/settings"
-                android:title="@string/str_Settings" />
-            <item
-                android:id="@+id/aboutMe"
-                android:icon="@drawable/about_me"
-                android:title="@string/str_AboutMe" />
-            <item
-                android:id="@+id/credits"
-                android:icon="@drawable/credits"
-                android:title="@string/str_Credits" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/aboutMe"
+        android:icon="@drawable/about_me"
+        android:title="@string/str_AboutMe"/>
+
+    <item
+        android:id="@+id/credits"
+        android:icon="@drawable/credits"
+        android:title="@string/str_Credits"/>
 
 </menu>
