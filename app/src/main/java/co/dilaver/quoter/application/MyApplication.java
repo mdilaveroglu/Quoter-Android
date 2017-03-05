@@ -18,14 +18,15 @@ package co.dilaver.quoter.application;
 
 import android.app.Application;
 
-import co.dilaver.quoter.models.Quote;
-import co.dilaver.quoter.storage.SharedPrefStorage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class MyApplication extends Application{
+import co.dilaver.quoter.models.Quote;
+import co.dilaver.quoter.storage.SharedPrefStorage;
+
+public class MyApplication extends Application {
 
     public static ArrayList<Quote> savedQuotesList;
 
@@ -38,8 +39,9 @@ public class MyApplication extends Application{
         SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(this);
         Gson gson = new Gson();
 
-        if (!sharedPrefStorage.getSavedQuotes().equals("empty")){
-            savedQuotesList = gson.fromJson(sharedPrefStorage.getSavedQuotes(), new TypeToken<ArrayList<Quote>>(){}.getType());
+        if (!sharedPrefStorage.getSavedQuotes().equals("empty")) {
+            savedQuotesList = gson.fromJson(sharedPrefStorage.getSavedQuotes(), new TypeToken<ArrayList<Quote>>() {
+            }.getType());
         }
 
     }

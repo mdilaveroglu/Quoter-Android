@@ -16,7 +16,6 @@
 
 package co.dilaver.quoter.fragments;
 
-
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -46,18 +45,14 @@ import co.dilaver.quoter.application.MyApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 
-
 public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.LongClickListener {
 
-    private static final String TAG = PopularFragment.class.getSimpleName();
     private QuotesAdapter quotesAdapter;
     private ArrayList<Quote> favoriteQuotesList;
     private CoordinatorLayout rootLayout;
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_quotes, container, false);
 
         rootLayout = (CoordinatorLayout) view.findViewById(R.id.clFavoriteRoot);
@@ -118,7 +113,7 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
                     startActivity(shareIntent);
                 } else if (item == 2) {
                     ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("Copied Text", favoriteQuotesList.get(pos).getQuoteText() + " - " +  favoriteQuotesList.get(pos).getQuoteAuthor());
+                    ClipData clip = ClipData.newPlainText("Copied Text", favoriteQuotesList.get(pos).getQuoteText() + " - " + favoriteQuotesList.get(pos).getQuoteAuthor());
                     clipboard.setPrimaryClip(clip);
 
                     Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
@@ -128,4 +123,5 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 }

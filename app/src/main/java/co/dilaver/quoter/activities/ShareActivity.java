@@ -352,7 +352,6 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void save() {
-
         previewLayout.setDrawingCacheEnabled(true);
         previewLayout.buildDrawingCache();
         Bitmap bmp = Bitmap.createBitmap(previewLayout.getDrawingCache());

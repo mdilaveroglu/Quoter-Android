@@ -33,7 +33,6 @@ public class TextFontAdapter extends BaseAdapter{
     private final Context context;
 
     public TextFontAdapter(Context context) {
-
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
@@ -340,7 +339,8 @@ public class TextFontAdapter extends BaseAdapter{
         return convertView;
     }
 
-    public static class ViewHolder {
+    private static class ViewHolder {
         public TextView text;
     }
+
 }

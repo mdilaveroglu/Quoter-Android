@@ -16,7 +16,6 @@
 
 package co.dilaver.quoter.fragments;
 
-
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -27,7 +26,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +52,7 @@ import co.dilaver.quoter.storage.SharedPrefStorage;
 import cz.msebera.android.httpclient.Header;
 import me.grantland.widget.AutofitHelper;
 
-
 public class QODFragment extends Fragment implements MainActivity.ActionBarItemsClickListener {
-
-    private static final String TAG = QODFragment.class.getSimpleName();
 
     private SharedPrefStorage sharedPrefStorage;
 
@@ -74,7 +69,6 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_qod, container, false);
 
         sharedPrefStorage = new SharedPrefStorage(getActivity());
@@ -133,7 +127,6 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     }
 
     private void getQod() {
-
         QuoterRestClient.get(QuoterRestClient.QOD, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -199,9 +192,6 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         sharedPrefStorage.setQodText(qodString);
         sharedPrefStorage.setQodAuthor(authorString);
 
-        Log.e(TAG, "quote: " + qodString);
-        Log.e(TAG, "author: " + authorString);
-
         qodText.setText(getString(R.string.str_WithinQuotation, qodString));
         qodAuthor.setText(authorString);
     }
@@ -258,4 +248,5 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
     public void pqInfoClicked() {
 
     }
+
 }

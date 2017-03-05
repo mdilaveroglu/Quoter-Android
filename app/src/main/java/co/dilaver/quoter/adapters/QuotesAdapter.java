@@ -29,21 +29,18 @@ import java.util.List;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.models.Quote;
 
-
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 
-    private static final String TAG = QuotesAdapter.class.getSimpleName();
-    private final LayoutInflater inflater;
+    public interface LongClickListener {
+        void longClicked(View view, int position);
+    }
+
     private List<Quote> data = Collections.emptyList();
     private LongClickListener clickListener;
+    private final LayoutInflater inflater;
 
     public QuotesAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-    }
-
-    public void setList(List<Quote> items) {
-        this.data = items;
-        notifyItemRangeChanged(0, items.size());
     }
 
     @Override
@@ -58,13 +55,18 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         holder.author.setText(data.get(position).getQuoteAuthor());
     }
 
-    public void setLongClickListener(LongClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
-
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setList(List<Quote> items) {
+        this.data = items;
+        notifyItemRangeChanged(0, items.size());
+    }
+
+    public void setLongClickListener(LongClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
@@ -92,7 +94,4 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         }
     }
 
-    public interface LongClickListener {
-        void longClicked(View view, int position);
-    }
 }

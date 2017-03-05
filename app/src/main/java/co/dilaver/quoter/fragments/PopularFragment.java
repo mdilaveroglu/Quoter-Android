@@ -208,4 +208,5 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
         builder.setCancelable(true);
         builder.show();
     }
+
 }

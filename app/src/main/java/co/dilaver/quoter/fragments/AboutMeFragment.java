@@ -16,7 +16,6 @@
 
 package co.dilaver.quoter.fragments;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,11 +30,8 @@ import co.dilaver.quoter.R;
 
 public class AboutMeFragment extends Fragment {
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_me, container, false);
 
         TextView mail = (TextView) view.findViewById(R.id.tvEmail);

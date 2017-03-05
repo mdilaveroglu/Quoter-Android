@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2016 Mehmet Dilaveroğlu
  *
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -133,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.qod_action_favorite:
                 if (actionBarItemsClickListener != null) {
@@ -168,12 +166,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.qod:
                 if (getSupportActionBar() != null) {
@@ -282,4 +278,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setActionBarItemsClickListener(ActionBarItemsClickListener actionBarItemsClickListener) {
         this.actionBarItemsClickListener = actionBarItemsClickListener;
     }
+
 }

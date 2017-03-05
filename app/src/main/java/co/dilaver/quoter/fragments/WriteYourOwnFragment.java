@@ -36,19 +36,15 @@ import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 import co.dilaver.quoter.util.ViewUtil;
 
-
-public class WriteYourOwnFragment extends Fragment implements MainActivity.ActionBarItemsClickListener{
+public class WriteYourOwnFragment extends Fragment implements MainActivity.ActionBarItemsClickListener {
 
     private EditText quoteText;
     private EditText quoteAuthor;
     private CoordinatorLayout rootLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_write_your_own, container, false);
-
 
         rootLayout = (CoordinatorLayout) view.findViewById(R.id.clWyoRoot);
         MainActivity activity = (MainActivity) getActivity();
@@ -56,8 +52,6 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
 
         quoteText = (EditText) view.findViewById(R.id.etMyQuote);
         quoteAuthor = (EditText) view.findViewById(R.id.etMyAuthor);
-
-
 
         return view;
     }
@@ -79,12 +73,12 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
 
     @Override
     public void wyoSaveClicked() {
-        if (!quoteText.getText().toString().equals("") &&  !quoteAuthor.getText().toString().equals("")){
+        if (!quoteText.getText().toString().equals("") && !quoteAuthor.getText().toString().equals("")) {
             SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
             Gson gson = new Gson();
 
-            Quote myQuote = new Quote(quoteText.getText().toString(),quoteAuthor.getText().toString());
-            if (!MyApplication.savedQuotesList.contains(myQuote)){
+            Quote myQuote = new Quote(quoteText.getText().toString(), quoteAuthor.getText().toString());
+            if (!MyApplication.savedQuotesList.contains(myQuote)) {
                 MyApplication.savedQuotesList.add(myQuote);
                 sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
             }
@@ -97,7 +91,7 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
 
     @Override
     public void wyoShareClicked() {
-        if (!quoteText.getText().toString().equals("") &&  !quoteAuthor.getText().toString().equals("")) {
+        if (!quoteText.getText().toString().equals("") && !quoteAuthor.getText().toString().equals("")) {
             Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
             shareIntent.putExtra("quote", quoteText.getText().toString());
             shareIntent.putExtra("author", quoteAuthor.getText().toString());
@@ -109,4 +103,5 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
     public void pqInfoClicked() {
 
     }
+
 }

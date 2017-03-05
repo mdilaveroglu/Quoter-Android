@@ -16,8 +16,8 @@
 
 package co.dilaver.quoter.constants;
 
-
 public class Fonts {
+
     public static final int ALEXBRUSH_REGULAR = 0;
     public static final int ALLER_LT = 1;
     public static final int ALLURA_REGULAR = 2;
@@ -60,4 +60,5 @@ public class Fonts {
     public static final int BLACK_JACK = 39;
     public static final int CAC_CHAMPAGNE = 40;
     public static final int OSTRICH_REGULAR = 41;
+
 }
