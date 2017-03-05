@@ -19,12 +19,8 @@ package co.dilaver.quoter.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,12 +36,10 @@ import co.dilaver.quoter.fragments.QODFragment;
 import co.dilaver.quoter.fragments.SettingsFragment;
 import co.dilaver.quoter.fragments.WriteYourOwnFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     public interface ActionBarItemsClickListener {
         void qodFavoriteClicked();
-
-        void qodShareClicked();
 
         void qodCopyClicked();
 
@@ -56,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         void pqInfoClicked();
     }
 
-    private DrawerLayout drawerLayout;
     private MenuItem qodFavorite;
-    private MenuItem qodShare;
     private MenuItem qodCopy;
     private MenuItem wyoDone;
     private MenuItem wyoShare;
@@ -81,14 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportActionBar().setTitle(getString(R.string.str_QOD));
         }
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
@@ -100,16 +84,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            if (fragment instanceof QODFragment) {
-                super.onBackPressed();
-                return;
-            }
-            View view = bottomNavigationView.findViewById(R.id.action_quote_of_the_day);
-            view.performClick();
+        if (fragment instanceof QODFragment) {
+            super.onBackPressed();
+            return;
         }
+        View view = bottomNavigationView.findViewById(R.id.action_quote_of_the_day);
+        view.performClick();
     }
 
     @Override
@@ -117,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         qodFavorite = menu.findItem(R.id.qod_action_favorite);
-        qodShare = menu.findItem(R.id.qod_action_share);
         qodCopy = menu.findItem(R.id.qod_action_copy);
         wyoDone = menu.findItem(R.id.wyo_action_done);
         wyoShare = menu.findItem(R.id.wyo_action_share);
@@ -131,11 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.qod_action_favorite:
                 if (actionBarItemsClickListener != null) {
                     actionBarItemsClickListener.qodFavoriteClicked();
-                }
-                return true;
-            case R.id.qod_action_share:
-                if (actionBarItemsClickListener != null) {
-                    actionBarItemsClickListener.qodShareClicked();
                 }
                 return true;
             case R.id.qod_action_copy:
@@ -158,6 +132,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     actionBarItemsClickListener.pqInfoClicked();
                 }
                 return true;
+            case R.id.action_about_me:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_AboutMe));
+                }
+                qodFavorite.setVisible(false);
+                qodCopy.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
+
+                bottomNavigationView.setVisibility(View.GONE);
+
+                fragment = new AboutMeFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+                return true;
+            case R.id.action_credits:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_Credits));
+                }
+                qodFavorite.setVisible(false);
+                qodCopy.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
+
+                bottomNavigationView.setVisibility(View.GONE);
+
+                fragment = new CreditsFragment();
+                FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+                ft2.replace(R.id.mainFrame, fragment);
+                ft2.commit();
+                return true;
+            case R.id.action_settings:
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(getString(R.string.str_Settings));
+                }
+                qodFavorite.setVisible(false);
+                qodCopy.setVisible(false);
+                wyoDone.setVisible(false);
+                wyoShare.setVisible(false);
+                pqInfo.setVisible(false);
+
+                bottomNavigationView.setVisibility(View.GONE);
+
+                fragment = new SettingsFragment();
+                FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+                ft3.replace(R.id.mainFrame, fragment);
+                ft3.commit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -171,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportActionBar().setTitle(getString(R.string.str_QOD));
                 }
                 qodFavorite.setVisible(true);
-                qodShare.setVisible(true);
                 qodCopy.setVisible(true);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
@@ -186,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportActionBar().setTitle(getString(R.string.str_PopularQuotes));
                 }
                 qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
                 qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
@@ -199,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportActionBar().setTitle(getString(R.string.str_WriteYourOwn));
                 }
                 qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
                 qodCopy.setVisible(false);
                 wyoDone.setVisible(true);
                 wyoShare.setVisible(true);
@@ -212,7 +234,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportActionBar().setTitle(getString(R.string.str_FavoriteQuotes));
                 }
                 qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
                 qodCopy.setVisible(false);
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
@@ -222,60 +243,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-        switch (item.getItemId()) {
-            case R.id.aboutMe:
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(getString(R.string.str_AboutMe));
-                }
-                qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
-                qodCopy.setVisible(false);
-                wyoDone.setVisible(false);
-                wyoShare.setVisible(false);
-                pqInfo.setVisible(false);
-
-                bottomNavigationView.setVisibility(View.GONE);
-
-                fragment = new AboutMeFragment();
-                break;
-            case R.id.credits:
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(getString(R.string.str_Credits));
-                }
-                qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
-                qodCopy.setVisible(false);
-                wyoDone.setVisible(false);
-                wyoShare.setVisible(false);
-                pqInfo.setVisible(false);
-
-                bottomNavigationView.setVisibility(View.GONE);
-
-                fragment = new CreditsFragment();
-                break;
-            case R.id.settings:
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(getString(R.string.str_Settings));
-                }
-                qodFavorite.setVisible(false);
-                qodShare.setVisible(false);
-                qodCopy.setVisible(false);
-                wyoDone.setVisible(false);
-                wyoShare.setVisible(false);
-                pqInfo.setVisible(false);
-
-                bottomNavigationView.setVisibility(View.GONE);
-
-                fragment = new SettingsFragment();
-                break;
-        }
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, fragment);
         ft.commit();
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

@@ -1,56 +1,70 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".activities.MainActivity">
 
     <item
         android:id="@+id/qod_action_copy"
+        android:icon="@drawable/copy_white"
         android:orderInCategory="100"
         android:title="@string/action_copy"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/copy_white"
         />
 
     <item
         android:id="@+id/qod_action_favorite"
+        android:icon="@drawable/heart_white"
         android:orderInCategory="100"
         android:title="@string/action_save"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/heart_white"
-        />
-
-    <item
-        android:id="@+id/qod_action_share"
-        android:orderInCategory="100"
-        android:title="@string/action_share"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/share_white"
         />
 
     <item
         android:id="@+id/wyo_action_done"
+        android:icon="@drawable/check"
         android:orderInCategory="100"
         android:title="@string/action_done"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/check"
         android:visible="false"
+        app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/wyo_action_share"
+        android:icon="@drawable/ic_share_white_24px"
         android:orderInCategory="100"
         android:title="@string/action_share"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/share_white"
         android:visible="false"
+        app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/pq_action_info"
+        android:icon="@drawable/info"
         android:orderInCategory="100"
         android:title="@string/action_info"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/info"
         android:visible="false"
+        app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:orderInCategory="100"
+        android:title="@string/str_Settings"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_about_me"
+        android:icon="@drawable/about_me"
+        android:orderInCategory="100"
+        android:title="@string/str_AboutMe"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_credits"
+        android:icon="@drawable/credits"
+        android:orderInCategory="100"
+        android:title="@string/str_Credits"
+        app:showAsAction="never"/>
+
 </menu>

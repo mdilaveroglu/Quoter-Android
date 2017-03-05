@@ -181,11 +181,6 @@ public class PopularFragment extends Fragment implements QuotesAdapter.LongClick
     }
 
     @Override
-    public void qodShareClicked() {
-
-    }
-
-    @Override
     public void qodCopyClicked() {
 
     }

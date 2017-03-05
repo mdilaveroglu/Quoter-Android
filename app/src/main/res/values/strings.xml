@@ -8,12 +8,6 @@
     <string name="action_done">Done</string>
     <string name="title_activity_main">Quoter</string>
     <string name="title_activity_share">Share</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    //NavHeaderMain
-    <string name="header_background">Header Background</string>
-    <string name="app_icon">App Icon</string>
 
     //MainActivity
     <string name="str_QOD">Quote of the Day</string>

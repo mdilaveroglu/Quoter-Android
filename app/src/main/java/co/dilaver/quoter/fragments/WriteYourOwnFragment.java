@@ -62,11 +62,6 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
     }
 
     @Override
-    public void qodShareClicked() {
-
-    }
-
-    @Override
     public void qodCopyClicked() {
 
     }

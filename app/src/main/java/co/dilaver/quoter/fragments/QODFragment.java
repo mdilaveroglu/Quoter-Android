@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -52,7 +53,7 @@ import co.dilaver.quoter.storage.SharedPrefStorage;
 import cz.msebera.android.httpclient.Header;
 import me.grantland.widget.AutofitHelper;
 
-public class QODFragment extends Fragment implements MainActivity.ActionBarItemsClickListener {
+public class QODFragment extends Fragment implements MainActivity.ActionBarItemsClickListener, View.OnClickListener {
 
     private SharedPrefStorage sharedPrefStorage;
 
@@ -80,17 +81,13 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
         qodText = (TextView) view.findViewById(R.id.tvQodText);
         qodAuthor = (TextView) view.findViewById(R.id.tvQodAuthor);
-        noData = (TextView) view.findViewById(R.id.tvNoData);
         rootLayout = (CoordinatorLayout) view.findViewById(R.id.clQodRoot);
         loadingQod = (ProgressBar) view.findViewById(R.id.pbQod);
-        noData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                noData.setVisibility(View.GONE);
-                loadingQod.setVisibility(View.VISIBLE);
-                getQod();
-            }
-        });
+        noData = (TextView) view.findViewById(R.id.tvNoData);
+        noData.setOnClickListener(this);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         AutofitHelper.create(qodText);
 
@@ -111,6 +108,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
             getQod();
         }
 
+
         return view;
     }
 
@@ -123,6 +121,25 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
             qodAuthor.setTypeface(font);
             qodText.setTextColor(sharedPrefStorage.getQodColor());
             qodAuthor.setTextColor(sharedPrefStorage.getQodColor());
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvNoData:
+                noData.setVisibility(View.GONE);
+                loadingQod.setVisibility(View.VISIBLE);
+                getQod();
+                break;
+            case R.id.fab:
+                if (!qodString.equals("") && !authorString.equals("")) {
+                    Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
+                    shareIntent.putExtra("quote", qodString);
+                    shareIntent.putExtra("author", authorString);
+                    startActivity(shareIntent);
+                }
+                break;
         }
     }
 
@@ -210,16 +227,6 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
                 MyApplication.savedQuotesList.add(quote);
                 sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
             }
-        }
-    }
-
-    @Override
-    public void qodShareClicked() {
-        if (!qodString.equals("") && !authorString.equals("")) {
-            Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
-            shareIntent.putExtra("quote", qodString);
-            shareIntent.putExtra("author", authorString);
-            startActivity(shareIntent);
         }
     }
 
