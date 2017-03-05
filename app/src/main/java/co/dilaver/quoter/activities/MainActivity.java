@@ -177,6 +177,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
 
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
                 fragment = new QODFragment();
                 break;
             case R.id.action_popular_quotes:
@@ -232,6 +234,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
 
+                bottomNavigationView.setVisibility(View.GONE);
+
                 fragment = new AboutMeFragment();
                 break;
             case R.id.credits:
@@ -245,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
 
+                bottomNavigationView.setVisibility(View.GONE);
+
                 fragment = new CreditsFragment();
                 break;
             case R.id.settings:
@@ -257,6 +263,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 wyoDone.setVisible(false);
                 wyoShare.setVisible(false);
                 pqInfo.setVisible(false);
+
+                bottomNavigationView.setVisibility(View.GONE);
 
                 fragment = new SettingsFragment();
                 break;
