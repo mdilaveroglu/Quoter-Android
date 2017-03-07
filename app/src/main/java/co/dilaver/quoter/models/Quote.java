@@ -16,8 +16,9 @@
 
 package co.dilaver.quoter.models;
 
-
 public class Quote {
+
+    public static final String EMPTY = "empty";
 
     private String quoteText;
     private String quoteAuthor;

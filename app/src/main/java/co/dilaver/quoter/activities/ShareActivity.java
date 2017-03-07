@@ -17,6 +17,7 @@
 package co.dilaver.quoter.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,7 +30,6 @@ import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,12 +46,15 @@ import java.io.FileOutputStream;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.adapters.TextFontAdapter;
 import co.dilaver.quoter.constants.Fonts;
+import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 import info.hoang8f.widget.FButton;
 
 public class ShareActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
-    private static final String TAG = ShareActivity.class.getSimpleName();
+    private static final String EXTRA_QUOTE = "quote";
+    private static final String EXTRA_AUTHOR = "author";
+
     private FButton chooseTextColor;
     private FButton chooseBackgroundColor;
     private FButton chooseTextFont;
@@ -67,7 +70,13 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     private TextView previewAuthor;
 
     private TextFontAdapter textFontAdapter;
-    private SharedPrefStorage storage;
+
+    public static Intent getCallingIntent(Context context, Quote qod) {
+        Intent intent = new Intent(context, ShareActivity.class);
+        intent.putExtra(EXTRA_QUOTE, qod.getQuoteText());
+        intent.putExtra(EXTRA_AUTHOR, qod.getQuoteAuthor());
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +90,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        storage = new SharedPrefStorage(this);
+        SharedPrefStorage storage = new SharedPrefStorage(this);
 
         chooseTextColor = (FButton) findViewById(R.id.btChooseTextColor);
         chooseBackgroundColor = (FButton) findViewById(R.id.btChooseBackgroundColor);
@@ -109,8 +118,8 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), storage.getQodFont());
         finalImage.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        previewQuote.setText(getIntent().getStringExtra("quote"));
-        previewAuthor.setText(getIntent().getStringExtra("author"));
+        previewQuote.setText(getIntent().getStringExtra(EXTRA_QUOTE));
+        previewAuthor.setText(getIntent().getStringExtra(EXTRA_AUTHOR));
         previewQuote.setTextColor(Color.WHITE);
         previewAuthor.setTextColor(Color.WHITE);
         previewQuote.setTextSize(25);
@@ -369,8 +378,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             fos = new FileOutputStream(image);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
+        } catch (Exception ignored) {
         }
 
         Intent shareIntent = new Intent();

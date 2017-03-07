@@ -5,16 +5,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 
+import co.dilaver.quoter.models.Quote;
+
 public class SharedPrefStorage {
 
     private static final String USER_PREFS = "USER_PREFS";
+    private static final String SAVED_QUOTES = "savedQuotes";
+    private static final String QOD_TEXT = "qodText";
+    private static final String QOD_AUTHOR = "qodAuthor";
+    private static final String QOD_FONT = "qodFont";
+    private static final String QOD_COLOR = "qodColor";
+
     private final SharedPreferences appSharedPrefs;
     private final SharedPreferences.Editor prefsEditor;
-    private final String savedQuotes = "savedQuotes";
-    private final String qodText = "qodText";
-    private final String qodAuthor = "qodAuthor";
-    private final String qodFont = "qodFont";
-    private final String qodColor = "qodColor";
 
     public SharedPrefStorage(Context context) {
         this.appSharedPrefs = context.getSharedPreferences(USER_PREFS, Activity.MODE_PRIVATE);
@@ -22,43 +25,39 @@ public class SharedPrefStorage {
     }
 
     public String getSavedQuotes() {
-        return appSharedPrefs.getString(savedQuotes, "empty");
+        return appSharedPrefs.getString(SAVED_QUOTES, Quote.EMPTY);
     }
 
     public void setSavedQuotes(String quotes) {
-        prefsEditor.putString(savedQuotes, quotes).commit();
+        prefsEditor.putString(SAVED_QUOTES, quotes).commit();
     }
 
-    public String getQodText() {
-        return appSharedPrefs.getString(qodText, "empty");
+    public Quote getQod() {
+        return new Quote(appSharedPrefs.getString(QOD_TEXT, Quote.EMPTY), appSharedPrefs.getString(QOD_AUTHOR, Quote.EMPTY));
     }
 
     public void setQodText(String text) {
-        prefsEditor.putString(qodText, text).commit();
-    }
-
-    public String getQodAuthor() {
-        return appSharedPrefs.getString(qodAuthor, "empty");
+        prefsEditor.putString(QOD_TEXT, text).commit();
     }
 
     public void setQodAuthor(String author) {
-        prefsEditor.putString(qodAuthor, author).commit();
+        prefsEditor.putString(QOD_AUTHOR, author).commit();
     }
 
     public String getQodFont() {
-        return appSharedPrefs.getString(qodFont, "Exo-Regular.otf");
+        return appSharedPrefs.getString(QOD_FONT, "Exo-Regular.otf");
     }
 
     public void setQodFont(String font) {
-        prefsEditor.putString(qodFont, font).commit();
+        prefsEditor.putString(QOD_FONT, font).commit();
     }
 
     public int getQodColor() {
-        return appSharedPrefs.getInt(qodColor, Color.WHITE);
+        return appSharedPrefs.getInt(QOD_COLOR, Color.WHITE);
     }
 
     public void setQodColor(int color) {
-        prefsEditor.putInt(qodColor, color).commit();
+        prefsEditor.putInt(QOD_COLOR, color).commit();
     }
 
 }

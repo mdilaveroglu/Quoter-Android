@@ -1,74 +1,79 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:id="@+id/clQodRoot"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 tools:context=".fragments.QODFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".fragments.QODFragment">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/main_background"
-            android:scaleType="centerCrop"
-            android:src="@drawable/main_background"/>
+            android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/pbQod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:weightSum="10">
-
-            <me.grantland.widget.AutofitTextView
-                android:id="@+id/tvQodText"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"
-                android:gravity="center|fill_vertical"
-                android:maxLines="30"
-                android:textColor="@android:color/white"/>
+                android:layout_height="match_parent"
+                android:contentDescription="@string/main_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/main_background"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/autofit_text_view_quote_of_the_day_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
+                    android:gravity="center|fill_vertical"
+                    android:maxLines="30"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/text_view_quote_of_the_day_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/white"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvQodAuthor"
-                android:layout_width="match_parent"
+                android:id="@+id/text_view_no_data"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom|center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white"/>
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/str_Oops"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/tvNoData"
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="@string/str_Oops"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="gone"/>
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_share_white_24px"
+            app:fabSize="normal"/>
 
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_share_white_24px"
-        app:fabSize="normal"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</layout>

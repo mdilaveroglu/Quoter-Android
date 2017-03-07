@@ -19,19 +19,15 @@ package co.dilaver.quoter.fragments;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -47,6 +43,7 @@ import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.databinding.FragmentQodBinding;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.network.QuoterRestClient;
 import co.dilaver.quoter.storage.SharedPrefStorage;
@@ -57,90 +54,69 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
     private SharedPrefStorage sharedPrefStorage;
 
-    Typeface font;
-
-    private TextView qodText;
-    private TextView qodAuthor;
-    private TextView noData;
-    private CoordinatorLayout rootLayout;
-    private ProgressBar loadingQod;
-
-    private String qodString = "";
-    private String authorString = "";
+    private FragmentQodBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_qod, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_qod, container, false);
 
         sharedPrefStorage = new SharedPrefStorage(getActivity());
 
-        MainActivity activity = (MainActivity) getActivity();
-        activity.setActionBarItemsClickListener(this);
+        AutofitHelper.create(binding.autofitTextViewQuoteOfTheDayText);
 
-        font = Typeface.createFromAsset(getActivity().getAssets(), sharedPrefStorage.getQodFont());
+        Quote qod = sharedPrefStorage.getQod();
 
-        qodText = (TextView) view.findViewById(R.id.tvQodText);
-        qodAuthor = (TextView) view.findViewById(R.id.tvQodAuthor);
-        rootLayout = (CoordinatorLayout) view.findViewById(R.id.clQodRoot);
-        loadingQod = (ProgressBar) view.findViewById(R.id.pbQod);
-        noData = (TextView) view.findViewById(R.id.tvNoData);
-        noData.setOnClickListener(this);
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-
-        AutofitHelper.create(qodText);
-
-        qodText.setTypeface(font);
-        qodAuthor.setTypeface(font);
-        qodText.setTextColor(sharedPrefStorage.getQodColor());
-        qodAuthor.setTextColor(sharedPrefStorage.getQodColor());
-
-        if (sharedPrefStorage.getQodText().equals("empty") || sharedPrefStorage.getQodAuthor().equals("empty")) {
-            loadingQod.setVisibility(View.VISIBLE);
-            getQod();
+        if (qod.getQuoteText().equals(Quote.EMPTY) || qod.getQuoteAuthor().equals(Quote.EMPTY)) {
+            binding.progressBar.setVisibility(View.VISIBLE);
         } else {
-            qodString = sharedPrefStorage.getQodText();
-            authorString = sharedPrefStorage.getQodAuthor();
-
-            qodText.setText(getString(R.string.str_WithinQuotation, qodString));
-            qodAuthor.setText(authorString);
-            getQod();
+            setQuoteOfTheDayTextAndAuthor(qod);
         }
 
+        getQod();
 
-        return view;
+        ((MainActivity) getActivity()).setActionBarItemsClickListener(this);
+
+        binding.textViewNoData.setOnClickListener(this);
+        binding.fab.setOnClickListener(this);
+
+        return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        if (font != null) {
-            qodText.setTypeface(font);
-            qodAuthor.setTypeface(font);
-            qodText.setTextColor(sharedPrefStorage.getQodColor());
-            qodAuthor.setTextColor(sharedPrefStorage.getQodColor());
-        }
+        setQuoteOfTheDayTextAndAuthorFontAndColor();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tvNoData:
-                noData.setVisibility(View.GONE);
-                loadingQod.setVisibility(View.VISIBLE);
+            case R.id.text_view_no_data:
+                binding.textViewNoData.setVisibility(View.GONE);
+                binding.progressBar.setVisibility(View.VISIBLE);
                 getQod();
                 break;
             case R.id.fab:
-                if (!qodString.equals("") && !authorString.equals("")) {
-                    Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
-                    shareIntent.putExtra("quote", qodString);
-                    shareIntent.putExtra("author", authorString);
-                    startActivity(shareIntent);
-                }
+                startActivity(ShareActivity.getCallingIntent(getActivity(), sharedPrefStorage.getQod()));
                 break;
         }
+    }
+
+    private void setQuoteOfTheDayTextAndAuthor(Quote qod) {
+        binding.autofitTextViewQuoteOfTheDayText.setText(getString(R.string.str_WithinQuotation, qod.getQuoteText()));
+        binding.textViewQuoteOfTheDayAuthor.setText(qod.getQuoteAuthor());
+
+    }
+
+    private void setQuoteOfTheDayTextAndAuthorFontAndColor() {
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), sharedPrefStorage.getQodFont());
+
+        binding.autofitTextViewQuoteOfTheDayText.setTypeface(font);
+        binding.autofitTextViewQuoteOfTheDayText.setTextColor(sharedPrefStorage.getQodColor());
+
+        binding.textViewQuoteOfTheDayAuthor.setTypeface(font);
+        binding.textViewQuoteOfTheDayAuthor.setTextColor(sharedPrefStorage.getQodColor());
     }
 
     private void getQod() {
@@ -151,7 +127,7 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
                 try {
                     if (getActivity() != null) {
-                        loadingQod.setVisibility(View.GONE);
+                        binding.progressBar.setVisibility(View.GONE);
                         parseQodResponse(response);
                     }
                 } catch (JSONException e) {
@@ -163,12 +139,12 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
-                if (loadingQod.isShown()) {
-                    loadingQod.setVisibility(View.GONE);
-                    noData.setVisibility(View.VISIBLE);
+                if (binding.progressBar.isShown()) {
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.textViewNoData.setVisibility(View.VISIBLE);
                 } else {
                     if (isAdded()) {
-                        Snackbar.make(rootLayout, getString(R.string.str_NoInternetConnection), Snackbar.LENGTH_INDEFINITE)
+                        Snackbar.make(binding.coordinatorLayout, getString(R.string.str_NoInternetConnection), Snackbar.LENGTH_INDEFINITE)
                                 .setAction(getString(R.string.str_Retry), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -190,55 +166,48 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
         Document doc = Jsoup.parse(content);
         Elements table = doc.select("table[style=\"text-align:center; width:100%\"]");
         Elements rows = table.select("tr");
-        Elements qod = rows.get(0).select("td");
+        Elements qodTd = rows.get(0).select("td");
         Elements author = rows.get(1).select("td");
         Whitelist whitelist = Whitelist.none();
 
-        String newQuote = Html.fromHtml(Jsoup.clean(qod.toString(), whitelist)).toString();
+        String newQuote = Html.fromHtml(Jsoup.clean(qodTd.toString(), whitelist)).toString();
         String newAuthor = Html.fromHtml(Jsoup.clean(author.toString(), whitelist).replace("~", "")).toString();
 
-        if (!qodString.equals("") && !authorString.equals("")) {
-            if (!qodString.equals(newQuote) || !authorString.equals(newAuthor)) {
-                Snackbar.make(rootLayout, getString(R.string.str_Refreshing), Snackbar.LENGTH_SHORT).show();
-            }
+        Quote qod = sharedPrefStorage.getQod();
+
+        if (!qod.getQuoteText().equals(newQuote) || !qod.getQuoteAuthor().equals(newAuthor)) {
+            Snackbar.make(binding.coordinatorLayout, getString(R.string.str_Refreshing), Snackbar.LENGTH_SHORT).show();
         }
 
-        qodString = newQuote;
-        authorString = newAuthor;
+        sharedPrefStorage.setQodText(newQuote);
+        sharedPrefStorage.setQodAuthor(newAuthor);
 
-        sharedPrefStorage.setQodText(qodString);
-        sharedPrefStorage.setQodAuthor(authorString);
-
-        qodText.setText(getString(R.string.str_WithinQuotation, qodString));
-        qodAuthor.setText(authorString);
+        setQuoteOfTheDayTextAndAuthor(qod);
     }
 
     @Override
     public void qodFavoriteClicked() {
-        if (!qodString.equals("") && !authorString.equals("")) {
+        Snackbar.make(binding.coordinatorLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
 
-            Snackbar.make(rootLayout, getString(R.string.str_AddedToFavoriteQuotes), Snackbar.LENGTH_SHORT).show();
+        Gson gson = new Gson();
 
-            SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
-            Gson gson = new Gson();
-
-            Quote quote = new Quote(qodString, authorString);
-            if (!MyApplication.savedQuotesList.contains(quote)) {
-                MyApplication.savedQuotesList.add(quote);
-                sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
-            }
+        Quote qod = sharedPrefStorage.getQod();
+        Quote quote = new Quote(qod.getQuoteText(), qod.getQuoteAuthor());
+        if (!MyApplication.savedQuotesList.contains(quote)) {
+            MyApplication.savedQuotesList.add(quote);
+            sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
         }
     }
 
     @Override
     public void qodCopyClicked() {
-        if (!qodString.equals("") && !authorString.equals("")) {
-            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Copied Text", qodString + " - " + authorString);
-            clipboard.setPrimaryClip(clip);
+        Quote qod = sharedPrefStorage.getQod();
 
-            Snackbar.make(rootLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
-        }
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Copied Text", qod.getQuoteText() + " - " + qod.getQuoteAuthor());
+        clipboard.setPrimaryClip(clip);
+
+        Snackbar.make(binding.coordinatorLayout, getString(R.string.str_QuoteCopied), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
