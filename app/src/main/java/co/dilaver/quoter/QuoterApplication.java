@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package co.dilaver.quoter.application;
+package co.dilaver.quoter;
 
 import android.app.Application;
 

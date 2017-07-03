@@ -49,7 +49,7 @@ import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.adapters.QuotesAdapter;
-import co.dilaver.quoter.application.QuoterApplication;
+import co.dilaver.quoter.QuoterApplication;
 import co.dilaver.quoter.helper.QuoteParser;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.network.QuoterRestClient;
