@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 
-public class MyApplication extends Application {
+public class QuoterApplication extends Application {
 
     public static ArrayList<Quote> savedQuotesList;
 
@@ -39,11 +39,10 @@ public class MyApplication extends Application {
         SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(this);
         Gson gson = new Gson();
 
-        if (!sharedPrefStorage.getSavedQuotes().equals("empty")) {
+        if (!sharedPrefStorage.getSavedQuotes().equals(Quote.EMPTY)) {
             savedQuotesList = gson.fromJson(sharedPrefStorage.getSavedQuotes(), new TypeToken<ArrayList<Quote>>() {
             }.getType());
         }
-
     }
 
 }

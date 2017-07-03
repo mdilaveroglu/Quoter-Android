@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.ShareActivity;
 import co.dilaver.quoter.adapters.QuotesAdapter;
-import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.application.QuoterApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 
@@ -64,7 +64,7 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
         quotesAdapter.setLongClickListener(this);
         recyclerView.setAdapter(quotesAdapter);
 
-        favoriteQuotesList = MyApplication.savedQuotesList;
+        favoriteQuotesList = QuoterApplication.savedQuotesList;
         quotesAdapter.setList(favoriteQuotesList);
 
         if (favoriteQuotesList.isEmpty()) {
@@ -93,13 +93,13 @@ public class FavoriteQuotesFragment extends Fragment implements QuotesAdapter.Lo
                     SharedPrefStorage sharedPrefStorage = new SharedPrefStorage(getActivity());
                     Gson gson = new Gson();
 
-                    for (int i = 0; i < MyApplication.savedQuotesList.size(); i++) {
-                        if (MyApplication.savedQuotesList.get(i).getQuoteAuthor().equals(favoriteQuotesList.get(pos).getQuoteAuthor()) &&
-                                MyApplication.savedQuotesList.get(i).getQuoteText().equals(favoriteQuotesList.get(pos).getQuoteText())) {
+                    for (int i = 0; i < QuoterApplication.savedQuotesList.size(); i++) {
+                        if (QuoterApplication.savedQuotesList.get(i).getQuoteAuthor().equals(favoriteQuotesList.get(pos).getQuoteAuthor()) &&
+                                QuoterApplication.savedQuotesList.get(i).getQuoteText().equals(favoriteQuotesList.get(pos).getQuoteText())) {
 
-                            MyApplication.savedQuotesList.remove(i);
-                            favoriteQuotesList = MyApplication.savedQuotesList;
-                            sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
+                            QuoterApplication.savedQuotesList.remove(i);
+                            favoriteQuotesList = QuoterApplication.savedQuotesList;
+                            sharedPrefStorage.setSavedQuotes(gson.toJson(QuoterApplication.savedQuotesList));
                         }
                     }
 

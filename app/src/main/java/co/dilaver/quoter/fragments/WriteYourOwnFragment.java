@@ -31,7 +31,7 @@ import com.google.gson.Gson;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.application.QuoterApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 import co.dilaver.quoter.util.ViewUtil;
@@ -73,9 +73,9 @@ public class WriteYourOwnFragment extends Fragment implements MainActivity.Actio
             Gson gson = new Gson();
 
             Quote myQuote = new Quote(quoteText.getText().toString(), quoteAuthor.getText().toString());
-            if (!MyApplication.savedQuotesList.contains(myQuote)) {
-                MyApplication.savedQuotesList.add(myQuote);
-                sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
+            if (!QuoterApplication.savedQuotesList.contains(myQuote)) {
+                QuoterApplication.savedQuotesList.add(myQuote);
+                sharedPrefStorage.setSavedQuotes(gson.toJson(QuoterApplication.savedQuotesList));
             }
 
             ViewUtil.hideKeyboard(getActivity());

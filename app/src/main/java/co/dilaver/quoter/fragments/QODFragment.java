@@ -42,7 +42,7 @@ import org.jsoup.select.Elements;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.application.MyApplication;
+import co.dilaver.quoter.application.QuoterApplication;
 import co.dilaver.quoter.databinding.FragmentQodBinding;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.network.QuoterRestClient;
@@ -193,9 +193,9 @@ public class QODFragment extends Fragment implements MainActivity.ActionBarItems
 
         Quote qod = sharedPrefStorage.getQod();
         Quote quote = new Quote(qod.getQuoteText(), qod.getQuoteAuthor());
-        if (!MyApplication.savedQuotesList.contains(quote)) {
-            MyApplication.savedQuotesList.add(quote);
-            sharedPrefStorage.setSavedQuotes(gson.toJson(MyApplication.savedQuotesList));
+        if (!QuoterApplication.savedQuotesList.contains(quote)) {
+            QuoterApplication.savedQuotesList.add(quote);
+            sharedPrefStorage.setSavedQuotes(gson.toJson(QuoterApplication.savedQuotesList));
         }
     }
 
