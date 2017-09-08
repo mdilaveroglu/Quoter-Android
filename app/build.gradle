@@ -46,7 +46,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.1'
 
-    implementation 'org.jsoup:jsoup:1.10.2'
+    implementation 'org.jsoup:jsoup:1.10.3'
 
     implementation 'com.loopj.android:android-async-http:1.4.9'
 

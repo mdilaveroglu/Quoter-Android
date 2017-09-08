@@ -28,10 +28,10 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import co.dilaver.quoter.QuoterApplication;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.QuoterApplication;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.storage.SharedPrefStorage;
 import co.dilaver.quoter.util.ViewUtil;

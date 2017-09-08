@@ -39,10 +39,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
+import co.dilaver.quoter.QuoterApplication;
 import co.dilaver.quoter.R;
 import co.dilaver.quoter.activities.MainActivity;
 import co.dilaver.quoter.activities.ShareActivity;
-import co.dilaver.quoter.QuoterApplication;
 import co.dilaver.quoter.databinding.FragmentQodBinding;
 import co.dilaver.quoter.models.Quote;
 import co.dilaver.quoter.network.QuoterRestClient;

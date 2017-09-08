@@ -1,6 +1,5 @@
 package co.dilaver.quoter.fragments;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
